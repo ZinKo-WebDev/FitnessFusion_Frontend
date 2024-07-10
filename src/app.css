@@ -1,0 +1,8 @@
+.my-transparant-bg{
+    background: linear-gradient(90deg, #323232 16.16%, rgba(0, 0, 0, 0.07) 112.5%);
+
+}
+.auth-transparant-bg{
+    background: linear-gradient(90deg, #464646 5.09%, #023244 92.41%);
+
+}
