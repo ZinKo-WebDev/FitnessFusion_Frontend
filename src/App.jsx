@@ -9,6 +9,11 @@ import { getConfig, BASE_URL } from "./helpers/config"
 import { AuthContext } from './context/authContext'
 import axios from "axios"
 import FitnessFusionGuide from "./components/Guide/FitnessFusionGuide"
+import CheckOut from "./components/checkout/CheckOut"
+import Subscription from "./components/Subscription"
+import CalculateBMI from "./components/CalcBmi/CalculateBMI"
+import FitnessFusionGuide_Daily from "./components/Guide/FitnessFusionGuide_Daily"
+import FitnessFusionGuide_Daily_id from "./components/Guide/FitnessFusionGuide_Daily_id"
 
 function App() {
   const [accessToken, setAccessToken] = useState(JSON.parse(localStorage.getItem('currentToken')))
@@ -42,6 +47,14 @@ function App() {
           <Route path="/login" element={ <Login /> } />
           <Route path="/register" element={ <Register /> } />
           <Route path="/guide" element={  <FitnessFusionGuide/> } />
+          <Route path="/checkout" element={  <CheckOut/>  } />
+          <Route path="/subscription" element={   <Subscription/>  } />
+          <Route path="/bmi" element={ <CalculateBMI/>   } />
+          <Route path="/guide/days" element={ <FitnessFusionGuide_Daily/>  } />
+          <Route path="/guide/days/id" element={ <FitnessFusionGuide_Daily_id/> } />
+          
+       
+         
         
           </Route>
         

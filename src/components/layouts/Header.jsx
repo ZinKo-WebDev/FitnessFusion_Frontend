@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/authContext'
 import { BASE_URL, getConfig } from '../../helpers/config'
 import { toast } from 'react-toastify'
 import axios from 'axios'
 import main_logo from '../../images/main_logo.png'
 export default function Header() {
+    const navigate=useNavigate();
     const { accessToken, setAccessToken, currentUser, setCurrentUser} = useContext(AuthContext)
 
     const logoutUser = async () => {
@@ -15,6 +16,8 @@ export default function Header() {
             setCurrentUser(null)
             setAccessToken('')
             toast.success(response.data.message)
+            // navigate("/");
+            
         } catch (error) {
             if (error?.response?.status === 401) {
                 localStorage.removeItem('currentToken')
@@ -26,7 +29,7 @@ export default function Header() {
     }
 
     return (
-        <div className=''>
+        <div className='relative'>
         <nav className="fixed w-full top-0 z-[1] my-transparant-bg  text-[16px] font-opensans  text-white px-[70px]">
             <div className="flex justify-between items-center w-full">
                 <Link className="" path="/">

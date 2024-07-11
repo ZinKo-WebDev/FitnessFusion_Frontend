@@ -1,5 +1,5 @@
 import React from "react";
-
+import {Link} from 'react-router-dom'
 const Subscription = () => {
   return (
     <div className=" relative w-full text-[16px] justify-center items-center bg-[#323232] text-white font-bebas py-[65px] px-12">
@@ -79,12 +79,12 @@ const Subscription = () => {
             </li>
             <li className="flex items-center space-x-3"></li>
           </ul>
-          <a
-            href="#"
+          <Link
+             to="/checkout"
             className="text-white bg-[#1DA1D2] focus:ring-4 hover:bg-white focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-4 text-center dark:text-white  dark:focus:ring-purple-900 hover:border-2 hover:border-[#1DA1D2] absolute bottom-3 w-[94%] hover:text-[#1DA1D2]"
           >
             Register Now
-          </a>
+          </Link>
         </div>
         <div className="flex flex-col max-w-sm p-3  text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow  scale-90  hover:scale-100 font-poppin transition-all h-[600px] relative ">
           <h3 className="mb-4 text-2xl font-semibold text-[#b9f2ff]">
@@ -171,12 +171,12 @@ const Subscription = () => {
               <span>FITNESS FUSION's Nutrition Program</span>
             </li>
           </ul>
-          <a
-            href="#"
+          <Link
+             to="/checkout"
             className="text-white bg-[#1DA1D2] focus:ring-4 hover:bg-white  focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-4 text-center dark:text-white  dark:focus:ring-purple-900 hover:border-2 hover:border-[#1DA1D2] absolute bottom-3 w-[94%] hover:text-[#1DA1D2]"
           >
             Register Now
-          </a>
+          </Link>
         </div>
         <div className="flex flex-col max-w-sm p-3  text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow  scale-90  hover:scale-100 font-poppin transition-all h-[600px] relative ">
           <h3 className="mb-4 text-2xl font-semibold text-[#e1c564]">Gold</h3>
@@ -253,12 +253,12 @@ const Subscription = () => {
               <span>Mobile App Access</span>
             </li>
           </ul>
-          <a
-            href="#"
+          <Link
+            to="/checkout"
             className="text-white bg-[#1DA1D2] hover:bg-white focus:ring-4 focus:ring-purple-200 font-medium rounded-lg text-sm px-5 py-4 text-center dark:text-white  dark:focus:ring-purple-900 hover:border-2 hover:border-[#1DA1D2] absolute bottom-3 w-[94%] hover:text-[#1DA1D2]"
           >
             Register Now
-          </a>
+          </Link>
         </div>
       </div>
     </div>
