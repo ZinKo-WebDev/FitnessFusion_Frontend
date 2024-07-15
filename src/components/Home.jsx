@@ -85,6 +85,7 @@ export default function Home() {
         <Subscription></Subscription>
       )}
 
+
       <Footer></Footer>
     </div>
   );

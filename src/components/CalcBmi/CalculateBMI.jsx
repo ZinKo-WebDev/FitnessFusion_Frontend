@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
+import profileimg from '../../images/profile.jpg'
 
 const CalculateBMI = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const CalculateBMI = () => {
     workouts,
     setWorkouts,
   } = useContext(AuthContext);
-const testimg="apple.jpg";
+
 console.log(currentUser)
   return (
    
@@ -59,7 +60,7 @@ console.log(currentUser)
             <div className="flex items-center space-x-6 my-3">
               <div className="shrink-0">
                 
-                <img src={"http://localhost:8000/public/images/"+{testimg}} alt={testimg} height="200" id="preview_img"
+                <img src={profileimg} alt={testimg} height="200" id="preview_img"
                   className="h-20 w-20 object-cover rounded-full"/>
               </div>
               <label className="block">

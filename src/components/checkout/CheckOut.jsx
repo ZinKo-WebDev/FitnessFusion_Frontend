@@ -39,8 +39,11 @@ const CheckOut = () => {
     workouts,
     setWorkouts,
     userSubscriptionId,
+    error,
+    setErrors,
   } = useContext(AuthContext);
   console.log(userSubscriptionId);
+  
   const addSubscription = async (e, subsID) => {
     e.preventDefault();
     const data = {
@@ -49,7 +52,8 @@ const CheckOut = () => {
     console.log(data);
     try {
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,data
+        `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
+        data
       );
       toast.success(response.data.message);
       navigate(`/user/${currentUser.id}/bmi`);
@@ -201,14 +205,14 @@ const CheckOut = () => {
           <div className="flex flex-wrap justify-between gap-4 bg-gray-100 p-4 mt-8 rounded-lg">
             <button
               type="button"
-              className="min-w-[150px] px-6 py-3.5 text-sm bg-cyan-500 text-white text-gray-800 rounded-lg max-sm:order-1"
+              className="min-w-[150px] px-6 py-3.5 text-sm bg-cyan-500 text-gray-800 rounded-lg max-sm:order-1"
             >
               Back
             </button>
 
             <button
               onClick={(e) => {
-                addSubscription(e, userSubscriptionId);
+                addSubscription(e, currentUser.id);
               }}
               className="min-w-[150px] px-6 py-3.5 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
             >
