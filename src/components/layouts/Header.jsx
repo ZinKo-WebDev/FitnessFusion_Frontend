@@ -15,7 +15,7 @@ export default function Header() {
   const logoutUser = async () => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/user/logout`,
+        `${BASE_URL}/logout`,
         null,
         getConfig(accessToken)
       );
@@ -33,7 +33,7 @@ export default function Header() {
       console.log(error);
     }
   };
-// console.log(currentUser)
+  // console.log(currentUser)
   return (
     <div className="relative ">
       <nav
@@ -73,7 +73,7 @@ export default function Header() {
                   HOME
                 </NavLink>
               </li>
-              
+
               <li className="px-3 py-2">
                 <NavLink
                   className="hover:text-[#1DA1D2] text-xl"

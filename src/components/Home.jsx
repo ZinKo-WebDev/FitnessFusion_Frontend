@@ -1,8 +1,5 @@
-
 import mainbg from "../images/image.png";
 import { Link, useNavigate } from "react-router-dom";
-
-
 import Footer from "./footer/Footer";
 import About from "./About";
 import Trainer from "./Trainer";
@@ -12,32 +9,23 @@ import { AuthContext } from "../context/authContext";
 
 export default function Home() {
   const navigate = useNavigate();
-  const {userSubscriptionId, accessToken, setAccessToken, currentUser, setCurrentUser,subscriptionPlans} =
-  useContext(AuthContext);
-  const testimg="apple.jpg";
-  
-  
+  const {
+    userSubscriptionId,
+    accessToken,
+    setAccessToken,
+    currentUser,
+    setCurrentUser,
+    subscriptionPlans,
+  } = useContext(AuthContext);
+  const testimg = "apple.jpg";
 
-
-const addSubscription = async (e, subsID) => {
-  const data = {
-    subscription_id: subsID,
+  const addSubscription = async (e, subsID) => {
+    const data = {
+      subscription_id: subsID,
+    };
+    console.log(data);
   };
-  console.log(data);
-  // try {
-  //   const response = await axios.post(`${BASE_URL}/user/register`, data);
-  //   toast.success(response.data.message);
-  //   navigate("/");
-  // } catch (error) {
- 
-  //   if (error?.response?.status === 422) {
-  //     setErrors(error.response.data.errors);
-  //   }
-  //   console.log(error);
-  // }
-};
-console.log(currentUser?.subscription_id)
-
+  console.log(currentUser?.subscription_id);
 
   return (
     <div className="absolute">
@@ -88,19 +76,16 @@ console.log(currentUser?.subscription_id)
         </div>
       </div>
 
-  
-     <About></About>
-     
-     <Trainer></Trainer>
- {
-  currentUser?.subscription_id ?  <Subscription></Subscription> :  <Subscription></Subscription> 
- }
-   
+      <About></About>
 
- 
-   
+      <Trainer></Trainer>
+      {currentUser?.subscription_id ? (
+        <Subscription></Subscription>
+      ) : (
+        <Subscription></Subscription>
+      )}
 
-<Footer></Footer>
+      <Footer></Footer>
     </div>
   );
 }
