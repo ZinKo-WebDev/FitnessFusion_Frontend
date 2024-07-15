@@ -36,26 +36,21 @@ function App() {
   const [meals, setMeals] = useState(null);
   const [workouts, setWorkouts] = useState(null);
   const [locations, setLocations] = useState(null);
- //eg-fetch subscriptions 
-useEffect(() => {
-  const fetchAllSubscriptions= async () => {
-    try {
-      const response = await axios.get(
-        `${BASE_URL}/subscriptions/`
-      );
-      console.log(response.data.data)
-      setSubscriptionPlans(response.data.data);
-    } catch (error) {
-      
-      console.log(error);
-    }
-    
-  };
-  fetchAllSubscriptions();
- 
-}, [,currentUser]);
+  //eg-fetch subscriptions
+  useEffect(() => {
+    const fetchAllSubscriptions = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/subscriptions/`);
+        console.log(response.data.data);
+        setSubscriptionPlans(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAllSubscriptions();
+  }, [, currentUser]);
 
-// fetch user
+  // fetch user
   useEffect(() => {
     const fetchCurrentlyLoggedInUser = async () => {
       try {
@@ -64,27 +59,19 @@ useEffect(() => {
           getConfig(accessToken)
         );
         setCurrentUser(response.data.user);
-        console.log(response.data.user)
-      
+        console.log(response.data.user);
       } catch (error) {
         if (error?.response?.status === 401) {
           localStorage.removeItem("currentToken");
           setCurrentUser(null);
           setAccessToken("");
-          
         }
         console.log(error);
       }
-      
     };
-    
-    if (accessToken) fetchCurrentlyLoggedInUser();
-   
-  }, [accessToken]);
- 
 
- 
-  
+    if (accessToken) fetchCurrentlyLoggedInUser();
+  }, [accessToken]);
 
   return (
     <AuthContext.Provider
@@ -94,7 +81,8 @@ useEffect(() => {
         currentUser,
         setCurrentUser,
         subscriptionPlans,
-        userSubscriptionId, setUserSubscriptionId,
+        userSubscriptionId,
+        setUserSubscriptionId,
         age,
         setAge,
         bmi,
@@ -117,26 +105,40 @@ useEffect(() => {
         setWorkouts,
       }}
     >
-      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<NavBar></NavBar>}>
-            <Route index  element={<Home />} />
+            <Route index element={<Home />} />
+
             <Route path="/login" element={<Login />} />
+
             <Route path="/register" element={<Register />} />
+
             <Route path="/api/user" element={<UserIndex />} />
-       
+
             <Route path="/user/guide" element={<FitnessFusionGuide />} />
+
             <Route path="/user/:id/checkout" element={<CheckOut />} />
-            <Route path="/user/subscriptions" element={<Subscription  />} />
-            <Route path="/user/bmi" element={<CalculateBMI />} />
-            <Route path="/user/guide/days" element={<FitnessFusionGuide_Daily />} />
+
+            <Route path="/user/subscriptions" element={<Subscription />} />
+
+            <Route path="/user/:id/bmi" element={<CalculateBMI />} />
+
+            <Route
+              path="/user/guide/days"
+              element={<FitnessFusionGuide_Daily />}
+            />
+
             <Route
               path="/user/guide/days/id"
               element={<FitnessFusionGuide_Daily_id />}
             />
 
-<Route path="/user/guide/days" element={<ErrorRoute></ErrorRoute>} />
+            <Route
+              path="/user/guide/days"
+              element={<ErrorRoute></ErrorRoute>}
+            />
+
           </Route>
         </Routes>
       </BrowserRouter>

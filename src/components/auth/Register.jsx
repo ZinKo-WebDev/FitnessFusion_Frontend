@@ -34,7 +34,7 @@ export default function Register() {
     const data = { name,email,password,age,gender };
 
     try {
-      const response = await axios.post(`${BASE_URL}/register`, data);
+      const response = await axios.post(`${BASE_URL}/user/register`, data);
 
       localStorage.setItem(
         "currentToken",

@@ -27,7 +27,7 @@ export default function Login() {
     const data = { email, password };
 
     try {
-      const response = await axios.post(`${BASE_URL}/login`, data);
+      const response = await axios.post(`${BASE_URL}/user/login`, data);
       if (response.data.error) {
         setLoading(false);
         toast.error(response.data.error);

@@ -15,7 +15,7 @@ export default function Header() {
   const logoutUser = async () => {
     try {
       const response = await axios.post(
-        `${BASE_URL}/logout`,
+        `${BASE_URL}/user/logout`,
         null,
         getConfig(accessToken)
       );
@@ -78,11 +78,13 @@ export default function Header() {
                 <NavLink
                   className="hover:text-[#1DA1D2] text-xl"
                   aria-current="page"
-                  to="/"
+                  to="#aboutPage"
                 >
                   ABOUT US
                 </NavLink>
+                
               </li>
+             
               <li className="px-3 py-2">
                 <NavLink
                   className="hover:text-[#1DA1D2] text-xl"

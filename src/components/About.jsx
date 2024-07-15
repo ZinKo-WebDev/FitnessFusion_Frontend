@@ -3,7 +3,7 @@ import img_02 from "../images/img_02.jpg";
 import { Link } from "react-router-dom";
 const About = () => {
   return (
-    <div className=" relative w-full text-[16px] justify-center items-center bg-[#323232] text-white font-bebas">
+    <div  className=" relative w-full text-[16px] justify-center items-center bg-[#323232] text-white font-bebas">
     <div className="w-full text-[16px] text-center py-[65px]">
       <h1 className=" text-[70px]">
         Why <span className="text-[#1DA1D2]">Choose Us</span>{" "}

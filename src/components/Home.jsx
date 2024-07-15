@@ -76,7 +76,7 @@ export default function Home() {
         </div>
       </div>
 
-      <About></About>
+      <About ></About>
 
       <Trainer></Trainer>
       {currentUser?.subscription_id ? (
