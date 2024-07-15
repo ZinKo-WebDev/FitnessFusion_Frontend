@@ -1,13 +1,44 @@
-import React from "react";
+
 import mainbg from "../images/image.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 import Footer from "./footer/Footer";
 import About from "./About";
 import Trainer from "./Trainer";
 import Subscription from "./Subscription";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { AuthContext } from "../context/authContext";
+
 export default function Home() {
+  const navigate = useNavigate();
+  const {userSubscriptionId, accessToken, setAccessToken, currentUser, setCurrentUser,subscriptionPlans} =
+  useContext(AuthContext);
+  const testimg="apple.jpg";
+  
+  
+
+
+const addSubscription = async (e, subsID) => {
+  const data = {
+    subscription_id: subsID,
+  };
+  console.log(data);
+  // try {
+  //   const response = await axios.post(`${BASE_URL}/user/register`, data);
+  //   toast.success(response.data.message);
+  //   navigate("/");
+  // } catch (error) {
+ 
+  //   if (error?.response?.status === 422) {
+  //     setErrors(error.response.data.errors);
+  //   }
+  //   console.log(error);
+  // }
+};
+console.log(currentUser?.subscription_id)
+
+
   return (
     <div className="absolute">
       <div className=" relative my-transparant-bg w-full flex justify-end  text-[16px]">
@@ -57,22 +88,17 @@ export default function Home() {
         </div>
       </div>
 
-      {/* about section */}
+  
      <About></About>
-      {/* about section END */}
-
-      {/* trainer section */}
-     <Trainer></Trainer>
-      {/* Trainer Section END */}
-
-
-      {/* subscription plan */}
-    <Subscription></Subscription>
-      {/* subscription plan END */}
-
-      {/* BMI Calculation */}
      
-      {/* BMI Calculation END*/}
+     <Trainer></Trainer>
+ {
+  currentUser?.subscription_id ?  <Subscription></Subscription> :  <Subscription></Subscription> 
+ }
+   
+
+ 
+   
 
 <Footer></Footer>
     </div>

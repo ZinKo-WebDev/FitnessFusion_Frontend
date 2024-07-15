@@ -94,15 +94,14 @@ const About = () => {
         </div>
 
         <div className="relative w-[50%] flex justify-center items-center">
-          <div className="z-10 ">
+          <div className=" ">
             <img
               className="w-[430px] rounded-md"
               src={img_02}
               alt="img_02"
             />
           </div>
-          <div className="absolute z-[1] top-[30px] right-[200px] w-[430px] rounded-md h-[645px] border-2 border-slate-200"></div>
-          <div className="absolute z-[1] bottom-[30px] left-[135px] w-[430px] rounded-md h-[645px] border-2 border-[#1DA1D2]"></div>
+         
         </div>
       </div>
     </div>

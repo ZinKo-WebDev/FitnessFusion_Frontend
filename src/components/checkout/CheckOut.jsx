@@ -1,15 +1,78 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
+import { useNavigate } from "react-router-dom";
 
 const CheckOut = () => {
+  const navigate = useNavigate();
+  const {
+    accessToken,
+    setAccessToken,
+    currentUser,
+    setCurrentUser,
+    subscription,
+    setSubscription,
+    age,
+    setAge,
+    bmi,
+    setBmi,
+    gender,
+    setGender,
+    height,
+    setHeight,
+    weight,
+    setWeight,
+    image,
+    setImage,
+    goal,
+    setGoal,
+    task,
+    setTask,
+    meals,
+    setMeals,
+    workouts,
+    setWorkouts,
+    userSubscriptionId,
+    
+  } = useContext(AuthContext);
+  console.log(userSubscriptionId)
+  const addSubscription = async (e, subsID) => {
+    e.preventDefault();
+    const data = {
+      subscription_id: subsID,
+    };
+    console.log(data);
+    try {
+      const response = await axios.post(`http://127.0.0.1/api/user/${currentUser.id}`, {
+        headers: {
+          "Content-type": "application/json",
+          "Authorization": `Bearer ${accessToken}`
+      },
+      data:data
+      
+    }
+      );
+      toast.success(response.data.message);
+      navigate(`/user/${currentUser.id}/bmi`);
+    } catch (error) {
+   
+      if (error?.response?.status === 422) {
+        setErrors(error.response.data.errors);
+      }
+      console.log(error);
+    }
+  };
+console.log(currentUser)
+
   return (
     <div className="p-12 flex justify-center items-center mt-[100px]">
         <div className="p-12 flex flex-col w-[60%]">
       
       <div className="grid gap-4 sm:grid-cols-2 mt-8">
         <div className="flex items-center justify-center bg-gray-100 rounded-lg px-4 py-8">
-          <input type="radio" className="w-6 h-6 cursor-pointer" id="card" checked />
-          <label for="card" className="ml-4 flex gap-2 cursor-pointer">
+          <input type="radio" className="w-6 h-6 cursor-pointer" id="card"  />
+          <label htmlFor="card" className="ml-4 flex gap-2 cursor-pointer">
             <img src="https://readymadeui.com/images/visa.webp" className="w-12" alt="card1" />
             <img src="https://readymadeui.com/images/american-express.webp" className="w-12" alt="card2" />
             <img src="https://readymadeui.com/images/master.webp" className="w-12" alt="card3" />
@@ -18,7 +81,7 @@ const CheckOut = () => {
 
         <div className="flex items-center justify-center bg-gray-100 rounded-lg px-4 py-8">
           <input type="radio" className="w-6 h-6 cursor-pointer" id="paypal" />
-          <label for="paypal" className="ml-4 flex gap-2 cursor-pointer">
+          <label htmlFor="paypal" className="ml-4 flex gap-2 cursor-pointer">
             <img src="https://readymadeui.com/images/paypal.webp" className="w-24" alt="paypalCard" />
           </label>
         </div>
@@ -75,7 +138,7 @@ const CheckOut = () => {
 
           <div className="flex items-center">
             <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-            <label for="remember-me" className="ml-3 block text-sm">
+            <label htmlFor="remember-me" className="ml-3 block text-sm">
               I accept the <a href="javascript:void(0);" className="text-blue-600 font-semibold hover:underline ml-1">Terms and Conditions</a>
             </label>
           </div>
@@ -84,7 +147,9 @@ const CheckOut = () => {
         <div className="flex flex-wrap justify-between gap-4 bg-gray-100 p-4 mt-8 rounded-lg">
           <button type="button" className="min-w-[150px] px-6 py-3.5 text-sm bg-white text-gray-800 rounded-lg max-sm:order-1">Back</button>
         
-            <Link to="/bmi" className='min-w-[150px] px-6 py-3.5 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg'> Confirm payment</Link>
+            <button
+            //  onClick={e=>{addSubscription(e,userSubscriptionId)}}
+              className='min-w-[150px] px-6 py-3.5 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg'> Confirm payment</button>
           
         </div>
       </form>

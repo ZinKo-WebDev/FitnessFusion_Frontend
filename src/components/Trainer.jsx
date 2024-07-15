@@ -1,8 +1,40 @@
-import React from 'react'
+import {Link, useNavigate} from 'react-router-dom'
+import { AuthContext } from "../context/authContext";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import image_04 from "../images/image_04.png";
 import image_05 from "../images/image_05.png";
 import image_06 from "../images/image_06.png";
+
 const Trainer = () => {
+  const navigate = useNavigate();
+  const {
+    accessToken,
+    setAccessToken,
+    currentUser,
+    setCurrentUser,
+    subscription,
+    setSubscription,
+    age,
+    setAge,
+    bmi,
+    setBmi,
+    gender,
+    setGender,
+    height,
+    setHeight,
+    weight,
+    setWeight,
+    image,
+    setImage,
+    goal,
+    setGoal,
+    task,
+    setTask,
+    meals,
+    setMeals,
+    workouts,
+    setWorkouts,
+  } = useContext(AuthContext);
   return (
     <div className=" relative w-full text-[16px] justify-center items-center bg-[#323232] text-white font-bebas py-[65px] px-12">
     <div className="w-full text-[16px] text-center  ">
