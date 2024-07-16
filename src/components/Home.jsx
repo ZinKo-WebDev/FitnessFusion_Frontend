@@ -23,9 +23,9 @@ export default function Home() {
     const data = {
       subscription_id: subsID,
     };
-    console.log(data);
+ 
   };
-  console.log(currentUser?.subscription_id);
+
 
   return (
     <div className="absolute">

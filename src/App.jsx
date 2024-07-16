@@ -38,12 +38,13 @@ function App() {
   const [workouts, setWorkouts] = useState(null);
   const [locations, setLocations] = useState(null);
   const [profileImg,setProfileImg]=useState('')
+  const [avata,setAvata]=useState(false)
   //eg-fetch subscriptions
   useEffect(() => {
     const fetchAllSubscriptions = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/subscriptions/`);
-        console.log(response.data.data);
+   
         setSubscriptionPlans(response.data.data);
       } catch (error) {
         console.log(error);
@@ -60,8 +61,9 @@ function App() {
           `${BASE_URL}/user`,
           getConfig(accessToken)
         );
+        
         setCurrentUser(response.data.user);
-        console.log(response.data.user);
+      
       } catch (error) {
         if (error?.response?.status === 401) {
           localStorage.removeItem("currentToken");
@@ -75,9 +77,38 @@ function App() {
     if (accessToken) fetchCurrentlyLoggedInUser();
   }, [accessToken]);
 
+  console.log(currentUser)
+  
+   // fetch product
+   useEffect(() => {
+    const fetchCurrentlyLoggedInUser = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}/user/${currentUser.id}`
+        );
+        const usrSubsId=currentUser.subscription_id
+        console.log(response.data.user.subscriptions);
+        setWorkouts(response.data.user.subscriptions.workoutPlans);
+        setMeals(response.data.user.subscriptions.mealPlans);
+       
+      
+      } catch (error) {
+       
+        console.log(error);
+      }
+    };
+
+    if (accessToken) fetchCurrentlyLoggedInUser();
+  }, [currentUser]);
+
+ 
+  
+  
+
   return (
     <AuthContext.Provider
       value={{
+        avata,setAvata,
         accessToken,
         setAccessToken,
         currentUser,
@@ -110,14 +141,17 @@ function App() {
     >
       <BrowserRouter>
         <Routes>
+        
           <Route path="/" element={<NavBar></NavBar>}>
-            <Route index element={<Home />} />
+            <Route index  element={<Home />} />
 
             <Route path="/login" element={<Login />} />
 
             <Route path="/register" element={<Register />} />
 
-            <Route path="/api/user" element={<UserIndex />} />
+            <Route path="/api/user" element={<UserIndex />} >
+            
+            </Route>
 
             <Route path="/user/:id/guide" element={<FitnessFusionGuide />} />
 
@@ -140,9 +174,12 @@ function App() {
             />
 
             <Route
-              path="/user/guide/days"
+              path="*"
               element={<ErrorRoute></ErrorRoute>}
             />
+          
+
+
 
           </Route>
         </Routes>

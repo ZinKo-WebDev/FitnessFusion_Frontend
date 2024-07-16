@@ -35,8 +35,10 @@ const CalculateBMI = () => {
     setMeals,
     workouts,
     setWorkouts,
+    error,setErrors,
     profileImg,setProfileImg
   } = useContext(AuthContext);
+  const {user}=currentUser;
 const generateBmi=(e) => {
   e.preventDefault()
   const bmi= weight/(height*height)
@@ -62,7 +64,8 @@ const generateBmi=(e) => {
         data
       );
       toast.success(response.data.message);
-      navigate(`/user/${currentUser.id}/guide`);
+      console.log(currentUser.id)
+      navigate(`/user/${user.id}/guide`);
     } catch (error) {
       if (error?.response?.status) {
         setErrors(error.response.data.errors);
@@ -72,6 +75,7 @@ const generateBmi=(e) => {
   };
 
 console.log(currentUser)
+
   return (
    
     <div className="p-12 flex justify-center items-center mt-[100px]">
