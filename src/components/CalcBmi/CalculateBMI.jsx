@@ -112,6 +112,11 @@ console.log(currentUser)
         file:bg-violet-50 file:text-violet-700
         hover:file:bg-violet-100
       "
+      // form image to image state 
+      // onChange={(event) => {
+      //   console.log(event.target.files[0]); 
+      //   setImage(event.target.files[0]); 
+      // }}
             
                 />
               </label>

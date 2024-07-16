@@ -80,7 +80,7 @@ export default function Home() {
 
       <Trainer></Trainer>
       {currentUser?.subscription_id ? (
-        <Subscription></Subscription>
+       ''
       ) : (
         <Subscription></Subscription>
       )}

@@ -123,7 +123,8 @@ function App() {
 
             <Route path="/user/:id/checkout" element={<CheckOut />} />
 
-            <Route path="/user/subscriptions" element={<Subscription />} />
+<Route path="/user/subscriptions" element={<Subscription />} />
+            
 
             <Route path="/user/:id/bmi" element={<CalculateBMI />} />
             <Route path="/user/:id/profile/edit" element={<ProfileEdit/>} />
