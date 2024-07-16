@@ -41,6 +41,7 @@ const CheckOut = () => {
     userSubscriptionId,
     error,
     setErrors,
+    profileImg,setProfileImg
   } = useContext(AuthContext);
   console.log(userSubscriptionId);
   

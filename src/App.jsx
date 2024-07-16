@@ -17,6 +17,7 @@ import FitnessFusionGuide_Daily_id from "./components/Guide/FitnessFusionGuide_D
 import UserRoutineIndex from "./components/userRoutine/UserRoutineIndex";
 import ErrorRoute from "./components/ErrorRoute/ErrorRoute";
 import UserIndex from "./components/user/UserIndex";
+import ProfileEdit from "./components/auth/ProfileEdit";
 
 function App() {
   const [accessToken, setAccessToken] = useState(
@@ -36,6 +37,7 @@ function App() {
   const [meals, setMeals] = useState(null);
   const [workouts, setWorkouts] = useState(null);
   const [locations, setLocations] = useState(null);
+  const [profileImg,setProfileImg]=useState('')
   //eg-fetch subscriptions
   useEffect(() => {
     const fetchAllSubscriptions = async () => {
@@ -103,6 +105,7 @@ function App() {
         setMeals,
         workouts,
         setWorkouts,
+        profileImg,setProfileImg,
       }}
     >
       <BrowserRouter>
@@ -116,13 +119,14 @@ function App() {
 
             <Route path="/api/user" element={<UserIndex />} />
 
-            <Route path="/user/guide" element={<FitnessFusionGuide />} />
+            <Route path="/user/:id/guide" element={<FitnessFusionGuide />} />
 
             <Route path="/user/:id/checkout" element={<CheckOut />} />
 
             <Route path="/user/subscriptions" element={<Subscription />} />
 
             <Route path="/user/:id/bmi" element={<CalculateBMI />} />
+            <Route path="/user/:id/profile/edit" element={<ProfileEdit/>} />
 
             <Route
               path="/user/guide/days"

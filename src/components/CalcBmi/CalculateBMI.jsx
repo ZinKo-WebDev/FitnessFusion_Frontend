@@ -2,8 +2,11 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import profileimg from '../../images/profile.jpg'
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const CalculateBMI = () => {
+
   const navigate = useNavigate();
   const {
     accessToken,
@@ -32,7 +35,41 @@ const CalculateBMI = () => {
     setMeals,
     workouts,
     setWorkouts,
+    profileImg,setProfileImg
   } = useContext(AuthContext);
+const generateBmi=(e) => {
+  e.preventDefault()
+  const bmi= weight/(height*height)
+  const finalBmi=Math.ceil(bmi*10000)
+  setBmi(finalBmi);
+}
+  const handleBmiSubmit=(e) =>{
+    e.preventDefault()
+
+  } 
+  const storeAndGoNextHandler = async (e) => {
+    e.preventDefault();
+    const data = {
+      BMI:bmi,
+      weight:weight,
+      height:height,
+    
+    };
+    console.log(data);
+    try {
+      const response = await axios.put(
+        `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
+        data
+      );
+      toast.success(response.data.message);
+      navigate(`/user/${currentUser.id}/guide`);
+    } catch (error) {
+      if (error?.response?.status) {
+        setErrors(error.response.data.errors);
+      }
+      console.log(error);
+    }
+  };
 
 console.log(currentUser)
   return (
@@ -54,13 +91,14 @@ console.log(currentUser)
             action=""
             className=""
             onSubmit={(e) => {
-              handleBmiSubmit(e);
+              storeAndGoNextHandler(e);
             }}
+            
           >
             <div className="flex items-center space-x-6 my-3">
               <div className="shrink-0">
                 
-                <img src={profileimg} alt={testimg} height="200" id="preview_img"
+              <img src={profileimg} alt='profile.img' height="200" id="preview_img"
                   className="h-20 w-20 object-cover rounded-full"/>
               </div>
               <label className="block">
@@ -74,6 +112,7 @@ console.log(currentUser)
         file:bg-violet-50 file:text-violet-700
         hover:file:bg-violet-100
       "
+            
                 />
               </label>
             </div>
@@ -88,6 +127,7 @@ console.log(currentUser)
                 name="feet"
                 id="height"
                 placeholder="Height (in cm)"
+                onChange={(e) => setHeight(e.target.value)}
               />
             </div>
             <div className="py-2">
@@ -101,10 +141,11 @@ console.log(currentUser)
                 name="weight"
                 id="weight"
                 placeholder="Weight (in kg)"
+                onChange={(e) => setWeight(e.target.value)}
               />
             </div>
 
-            <button className="text-red-600 border-2 border-red-500 px-3 py-2">
+            <button onClick={(e) => generateBmi(e) } className="text-red-600 border-2 border-red-500 px-3 py-2">
               Generate Your BMI
             </button>
             <span>Please Do not Skil This.</span>
