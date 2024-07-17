@@ -7,6 +7,7 @@ import Subscription from "./Subscription";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../context/authContext";
 
+
 export default function Home() {
   const navigate = useNavigate();
   const {

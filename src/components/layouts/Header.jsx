@@ -1,12 +1,25 @@
 import React, { useContext, useState } from "react";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import {  NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
+import {Link} from 'react-scroll'
 import { BASE_URL, getConfig } from "../../helpers/config";
 import { toast } from "react-toastify";
 import axios from "axios";
 import main_logo from "../../images/main_logo.png";
+import {
+  TEDropdown,
+  TEDropdownToggle,
+  TEDropdownMenu,
+  TEDropdownItem,
+  TERipple,
+} from "tw-elements-react";
+import { CgProfile } from "react-icons/cg";
+import { RiSettings5Fill } from "react-icons/ri";
+import { TbLogout } from "react-icons/tb";
 
 export default function Header() {
+
+
   const location = useLocation();
   const navigate = useNavigate();
  
@@ -76,19 +89,25 @@ setAvata(!avata)
                   className="hover:text-[#1DA1D2] text-xl"
                   aria-current="page"
                   to="/"
+                  
+                  
+              
                 >
                   HOME
                 </NavLink>
               </li>
 
               <li className="px-3 py-2">
-                <NavLink
+                <Link
                   className="hover:text-[#1DA1D2] text-xl"
                   aria-current="page"
-                  to="#aboutPage"
+                  to="aboutPage"
+                  
+             
+
                 >
                   ABOUT US
-                </NavLink>
+                </Link>
               </li>
           {
             currentUser?.subscription_id
@@ -131,82 +150,37 @@ setAvata(!avata)
                     </NavLink>
                   </li> */}
                   {/* drop down start   */}
-                  <div className="px-3 text-xl" >
-                    <img
-                    onClick={(e) => avataHandler(e)}
-                      alt="tania andrew"
-                      src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-                      className="relative inline-block h-[65px] w-[65px] cursor-pointer rounded-full border-2 border-[#1DA1D2] object-cover object-center"
-                      data-popover-target="profile-menu"
-                    />
-                    <ul
-                      role="menu"
-                      data-popover="profile-menu"
-                      data-popover-placement="bottom"
-                      className={avata?"absolute z-10 min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-4 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none top-[70px] right-[10px] flex":"absolute z-10 min-w-[180px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-4 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none top-[70px] right-[10px] hidden"}
-                    >
-                      <button
-                      onClick={(e) => goProfileHandler(e)}
-                      
-                        role="menuitem"
-                        className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        
-                          stroke="currentColor"
-                          aria-hidden="true"
-                          className="h-6 w-6"
-                        >
-                          <path
-                           
-                          
-                            d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                          ></path>
-                        </svg>
-                        <p className="block font-sans text-xl font-bold leading-normal text-inherit antialiased">
-                          {currentUser?.name}
-                        </p>
-                      </button>
-                     
-                     
-                   
-                      <hr
-                        className="my-2 border-blue-gray-50"
-                      
-                        role="menuitem"
-                      />
-                      <button
-                        onClick={() => logoutUser()}
-                      
-                        role="menuitem"
-                        className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                        
-                          stroke="currentColor"
-                          aria-hidden="true"
-                          className="h-6 w-6"
-                        >
-                          <path
-                           
-                          
-                            d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"
-                          ></path>
-                        </svg>
-                        <p className="block font-sans text-xl font-bold leading-normal text-inherit antialiased">
-                          Sign Out
-                        </p>
-                      </button>
-                    </ul>
+                  {/* ---------- */}
 
-                   
-                  </div>
+          
+                  <TEDropdown className="flex justify-center">
+    <TERipple rippleColor="light">
+      <TEDropdownToggle className=" rounded-full flex items-center whitespace-nowrap  bg-primary  text-xs font-medium uppercase leading-normal text-white ">
+       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDR8H0rgV-zmSodkT_erGjzA_VhfWE22Pg7Q&s" alt="profileImg" className="w-16 h-16 rounded-full"/>
+       
+      </TEDropdownToggle>
+    </TERipple>
+
+    <TEDropdownMenu >
+      <TEDropdownItem>
+        <button
+           onClick={(e) => goProfileHandler(e)}
+        href="#" className=" flex items-center justify-start text-xl w-full min-w-[160px] cursor-pointer whitespace-nowrap bg-transparent px-4 py-2  text-left font-normal pointer-events-auto text-slate-950 hover:bg-neutral-100 active:text-slate-950 active:bg-neutral-100 focus:bg-neutral-100 focus:text-slate-950 focus:outline-none active:no-underline dark:text-slate-900 dark:hover:bg-blue-600 dark:focus:bg-blue-600 dark:active:bg-blue-600 tracking-wide">
+        <span className="px-2"> <CgProfile /></span>{currentUser.name}
+        </button>
+      </TEDropdownItem>
+     
+      <TEDropdownItem>
+        <button
+         onClick={() => logoutUser()}
+        href="#" className=" flex items-center justify-start text-xl w-full min-w-[160px] cursor-pointer whitespace-nowrap bg-transparent px-4 py-2  text-left font-normal pointer-events-auto text-slate-950 hover:bg-neutral-100 active:text-slate-950 active:bg-neutral-100 focus:bg-neutral-100 focus:text-slate-950 focus:outline-none active:no-underline dark:text-slate-900 dark:hover:bg-blue-600 dark:focus:bg-blue-600 dark:active:bg-blue-600 tracking-wide">
+        <span className="px-2"><TbLogout /></span>LogOut
+        </button>
+      </TEDropdownItem>
+    </TEDropdownMenu>
+  </TEDropdown>
+                  
+             
                   {/* drop down end  */}
                 </>
               ) : (

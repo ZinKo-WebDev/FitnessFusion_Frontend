@@ -16,9 +16,12 @@ const Subscription = () => {
     useContext(AuthContext);
 
   const addSubscription = async (e, subsID) => {
+    if(currentUser){
     setUserSubscriptionId(subsID);
     console.log(subsID);
-    navigate(`/user/${currentUser.id}/checkout`);
+    navigate(`/user/${currentUser.id}/checkout`)
+    }else{
+    navigate(`/register`);}
   };
 
 
@@ -42,7 +45,7 @@ const Subscription = () => {
               key={subsPlans.id}
               className="flex flex-col max-w-sm p-3  text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow  scale-90  hover:scale-100 font-poppin transition-all h-[600px] relative"
             >
-              <h3 className="mb-4 text-2xl font-semibold text-[#C0C0C0]">
+              <h3 className="mb-4 mt-4 text-2xl font-semibold text-[#C0C0C0]">
                 {subsPlans.name}
               </h3>
               <p className="font-light text-gray-500 sm:text-lg dark:text-gray-700">

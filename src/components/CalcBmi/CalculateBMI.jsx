@@ -65,7 +65,7 @@ const generateBmi=(e) => {
       );
       toast.success(response.data.message);
       console.log(currentUser.id)
-      navigate(`/user/${user.id}/guide`);
+      navigate(`/`);
     } catch (error) {
       if (error?.response?.status) {
         setErrors(error.response.data.errors);

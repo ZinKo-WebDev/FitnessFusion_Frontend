@@ -18,6 +18,7 @@ import UserRoutineIndex from "./components/userRoutine/UserRoutineIndex";
 import ErrorRoute from "./components/ErrorRoute/ErrorRoute";
 import UserIndex from "./components/user/UserIndex";
 import ProfileEdit from "./components/auth/ProfileEdit";
+import EditProfile from "./components/auth/EditProfile";
 
 function App() {
   const [accessToken, setAccessToken] = useState(
@@ -146,6 +147,7 @@ function App() {
             <Route index  element={<Home />} />
 
             <Route path="/login" element={<Login />} />
+         
 
             <Route path="/register" element={<Register />} />
 
@@ -161,7 +163,7 @@ function App() {
             
 
             <Route path="/user/:id/bmi" element={<CalculateBMI />} />
-            <Route path="/user/:id/profile/edit" element={<ProfileEdit/>} />
+            <Route path="/user/:id/profile/edit" element={<EditProfile/>} />
 
             <Route
               path="/user/guide/days"
