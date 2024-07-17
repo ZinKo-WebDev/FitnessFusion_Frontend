@@ -118,7 +118,7 @@ function App() {
     if (accessToken) {
       fetchWorkoutsAndMeals();
     }
-  }, [currentUser, accessToken]);
+  }, [currentUser]);
 
  
   
@@ -156,6 +156,7 @@ function App() {
         workouts,
         setWorkouts,
         profileImg,setProfileImg,
+        progress,setprogress
       }}
     >
       <BrowserRouter>

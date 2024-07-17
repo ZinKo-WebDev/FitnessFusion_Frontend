@@ -1,12 +1,13 @@
 import main_bg2 from "../../images/main_bg2.jpg";
 import Footer from "../footer/Footer";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
-
+import { Progress } from "@material-tailwind/react";
 const FitnessFusionGuide = () => {
   
-  
+  const [finishedWorkouts,setFinishedWorkouts]=useState([])
+  const [finishedMeals,setMinishedMeals]=useState([])
   const navigate = useNavigate();
   const {
     accessToken,
@@ -35,8 +36,62 @@ const FitnessFusionGuide = () => {
     setMeals,
     workouts,
     setWorkouts,
-    profileImg,setProfileImg
+    profileImg,setProfileImg,
+    progress,setprogress
   } = useContext(AuthContext);
+
+  const mealStatusHandler = (event, mealID) => {
+    setprogress(prevProgress => (prevProgress <= 99 ? prevProgress + 11 : 100));
+    
+    const jsonMeals = localStorage.getItem('meals');
+  
+    if (jsonMeals) {
+      const localMeals = JSON.parse(jsonMeals);
+      console.log(localMeals);
+  
+  
+      const updatedMeals = localMeals.map(meal => {
+        if (meal.id === mealID) {
+          return { ...meal, status: 0 }; 
+        }
+        return meal;
+      });
+  
+     
+      localStorage.setItem('meals', JSON.stringify(updatedMeals));
+  
+      const newjsonMeals = localStorage.getItem('meals');
+     setMeals(JSON.parse(newjsonMeals));
+      console.log('Updated Meals:', updatedMeals);
+    } else {
+      console.log('No meals found in local storage.');
+    }
+  };
+  const workoutStatusHandler = (event, workoutID) => {
+    setprogress(prevProgress => (prevProgress <= 99 ? prevProgress + 11 : 100));
+    const jsonWorkouts = localStorage.getItem('workouts');
+  
+    if (jsonWorkouts) {
+      const localWorkouts = JSON.parse(jsonWorkouts);
+      console.log('Original Workouts:', localWorkouts);
+  
+      const updatedWorkouts = localWorkouts.map(workout => {
+        if (workout.id === workoutID) {
+          return { ...workout, status: 0 }; // Use event.target.value for dynamic status
+        }
+        return workout;
+      });
+  
+      localStorage.setItem('workouts', JSON.stringify(updatedWorkouts));
+  
+      const newJsonWorkouts = localStorage.getItem('workouts');
+      setWorkouts(JSON.parse(newJsonWorkouts));
+      console.log('Updated Workouts:', updatedWorkouts);
+    } else {
+      console.log('No workouts found in local storage.');
+    }
+  };
+ 
   return (
     <div className=" ">
 {console.log(workouts)}
@@ -81,11 +136,11 @@ const FitnessFusionGuide = () => {
                    { meal.calories} 
                     </p>
                   </div>
-                  <div className="py-3 w-[200px] px-1  flex justify-center items-center bg-orange-600 text-white rounded-full text-xl tracking-wide">
-                    <a className="font-bebas" href="">
-                      Finished
-                    </a>
-                  </div>
+                  <button onClick={(e) => mealStatusHandler(e,meal.id) }  className= {meal.status>0 ? "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-orange-600 text-white rounded-full text-xl tracking-wide":"font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-red-600 text-white rounded-full text-xl tracking-wide"}>
+                   
+                      {meal.status>0 ? "Active":"Finished"}
+                
+                  </button>
                 </div>
                 <img
                   src={meal.image?meal.image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx4WMgvOd6VOLfsgHBsvZ59igcvKIzGycNNA&s"}
@@ -132,11 +187,11 @@ const FitnessFusionGuide = () => {
                    { workout.calories} 
                     </p>
                   </div>
-                  <div className="py-3 w-[200px] px-1  flex justify-center items-center bg-orange-600 text-white rounded-full text-xl tracking-wide">
-                    <a className="font-bebas" href="">
-                      Finished
-                    </a>
-                  </div>
+                  <button onClick={(e) => workoutStatusHandler(e,workout.id) } className= {workout.status>0 ? "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-orange-600 text-white rounded-full text-xl tracking-wide":"font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-red-600 text-white rounded-full text-xl tracking-wide"}>
+                   
+                      {workout.status>0 ? "Active":"Finished"}
+                   
+                  </button>
                 </div>
                 <img
                   src={workout.image?workout.image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRx4WMgvOd6VOLfsgHBsvZ59igcvKIzGycNNA&s"}
@@ -151,15 +206,11 @@ const FitnessFusionGuide = () => {
           }
         </ul>
       </div>
-        <div className="fixed bottom-0 w-screen bg-gray-100  rounded-md py-1">
-          <div className=" bg-gray-600 rounded-full ">
-            <div className="w-[75%] m-[3px] bg-[#1DA1D2]  text-center rounded-full flex justify-center items-center">
-              <div className="text-white font-bold text-sm inline-block bg-[#001821] px-2 rounded-full">
-                75% 
-              </div>
-            </div>
-          </div>
-        </div>
+        <Progress className="fixed bottom-0 w-screen"  value={progress} label="Completed" color="red" size="lg"/>;
+        {/* <div className="fixed bottom-0 w-screen bg-gray-100  rounded-md ">
+      
+        
+        </div> */}
       <Footer></Footer>
     </div>
   );
