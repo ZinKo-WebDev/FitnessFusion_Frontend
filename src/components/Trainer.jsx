@@ -36,7 +36,7 @@ const Trainer = () => {
     setWorkouts,
   } = useContext(AuthContext);
   return (
-    <div className=" relative w-full text-[16px] justify-center items-center bg-[#323232] text-white font-bebas py-[65px] px-12">
+    <div id='coach' className=" relative w-full text-[16px] justify-center items-center bg-[#323232] text-white font-bebas py-[65px] px-12">
     <div className="w-full text-[16px] text-center  ">
       <h1 className=" text-[70px]">Our professional</h1>
       <span className=" text-[70px] text-[#1DA1D2] ">trainers</span>

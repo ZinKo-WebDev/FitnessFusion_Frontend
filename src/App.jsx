@@ -39,68 +39,86 @@ function App() {
   const [workouts, setWorkouts] = useState(null);
   const [locations, setLocations] = useState(null);
   const [profileImg,setProfileImg]=useState('')
+  const [progress,setprogress]=useState(1)
   const [avata,setAvata]=useState(false)
   //eg-fetch subscriptions
   useEffect(() => {
     const fetchAllSubscriptions = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/subscriptions/`);
-   
         setSubscriptionPlans(response.data.data);
       } catch (error) {
-        console.log(error);
+        console.log('Error fetching subscription plans:', error);
       }
     };
+
     fetchAllSubscriptions();
-  }, [, currentUser]);
+  }, [currentUser]);
 
   // fetch user
   useEffect(() => {
     const fetchCurrentlyLoggedInUser = async () => {
       try {
-        const response = await axios.get(
-          `${BASE_URL}/user`,
-          getConfig(accessToken)
-        );
-        
+        const response = await axios.get(`${BASE_URL}/user`, getConfig(accessToken));
         setCurrentUser(response.data.user);
-      
       } catch (error) {
         if (error?.response?.status === 401) {
           localStorage.removeItem("currentToken");
           setCurrentUser(null);
           setAccessToken("");
+        } else {
+          console.log('Error fetching currently logged in user:', error);
         }
-        console.log(error);
       }
     };
 
-    if (accessToken) fetchCurrentlyLoggedInUser();
-  }, [accessToken]);
+    if (accessToken) {
+      fetchCurrentlyLoggedInUser();
+    }
+  }, [accessToken, setCurrentUser, setAccessToken]);
 
-  console.log(currentUser)
+
   
    // fetch product
    useEffect(() => {
-    const fetchCurrentlyLoggedInUser = async () => {
+    const fetchWorkoutsAndMeals = async () => {
       try {
-        const response = await axios.get(
-          `${BASE_URL}/user/${currentUser.id}`
-        );
-        const usrSubsId=currentUser.subscription_id
-        console.log(response.data.user.subscriptions);
-        setWorkouts(response.data.user.subscriptions.workoutPlans);
-        setMeals(response.data.user.subscriptions.mealPlans);
-       
-      
+        const response = await axios.get(`${BASE_URL}/user/${currentUser.id}`);
+
+        if (response.data && response.data.user && response.data.user.subscriptions) {
+          const { workoutPlans, mealPlans } = response.data.user.subscriptions;
+
+
+          if (workoutPlans) {
+            localStorage.setItem("workouts", JSON.stringify(workoutPlans));
+          }
+          if (mealPlans) {
+            localStorage.setItem("meals", JSON.stringify(mealPlans));
+          }
+          if(localStorage.getItem("progress")){
+
+          }
+         
+
+  
+          let workoutData = localStorage.getItem("workouts");
+          let mealData = localStorage.getItem("meals");
+
+        
+          setWorkouts(JSON.parse(workoutData));
+          setMeals(JSON.parse(mealData));
+        } else {
+          console.log('No subscriptions found for the user.');
+        }
       } catch (error) {
-       
-        console.log(error);
+        console.log('Error fetching workouts and meals:', error);
       }
     };
 
-    if (accessToken) fetchCurrentlyLoggedInUser();
-  }, [currentUser]);
+    if (accessToken) {
+      fetchWorkoutsAndMeals();
+    }
+  }, [currentUser, accessToken]);
 
  
   

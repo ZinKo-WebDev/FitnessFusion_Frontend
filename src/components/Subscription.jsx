@@ -26,7 +26,7 @@ const Subscription = () => {
 
 
   return (
-    <div className=" relative w-full text-[16px] justify-center items-center bg-[#323232] text-white font-bebas py-[65px] px-12">
+    <div id="subscriptions" className=" relative w-full text-[16px] justify-center items-center bg-[#323232] text-white font-bebas py-[65px] px-12">
       <div className="w-full text-[16px] text-center  ">
         <span className=" text-[70px] text-[#1DA1D2]">LEVEL UP  </span>
         <span className="text-[70px]">YOUR </span>

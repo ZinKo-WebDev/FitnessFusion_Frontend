@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     
 
-<div className=" bg-[#001821] text-white px-12 py-10">
+<div id='contactus' className=" bg-[#001821] text-white px-12 py-10">
 <div className="flex mt-[100px] pt-[100px] pb-[80px] ">
         <div className="w-[66.66%]  ">
             <p className="font-poppin text-[#1DA1D2] text-xl">Join a Newsletter</p>

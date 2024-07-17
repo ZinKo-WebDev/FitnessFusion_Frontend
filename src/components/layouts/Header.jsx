@@ -51,7 +51,7 @@ export default function Header() {
 setAvata(!avata)
   }
   const goProfileHandler=(e) => {
-    navigate('/user/:id/profile/edit')
+    navigate(`/user/${currentUser.id}/profile/edit`)
   }
   // console.log(currentUser)
   return (
@@ -86,12 +86,9 @@ setAvata(!avata)
             <ul className="flex justify-center items-center p-2">
               <li className="px-3 py-2">
                 <NavLink
-                  className="hover:text-[#1DA1D2] text-xl"
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
                   aria-current="page"
                   to="/"
-                  
-                  
-              
                 >
                   HOME
                 </NavLink>
@@ -99,10 +96,13 @@ setAvata(!avata)
 
               <li className="px-3 py-2">
                 <Link
-                  className="hover:text-[#1DA1D2] text-xl"
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
                   aria-current="page"
                   to="aboutPage"
-                  
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
              
 
                 >
@@ -113,7 +113,7 @@ setAvata(!avata)
             currentUser?.subscription_id
             ?   <li className="px-3 py-2">
             <NavLink
-              className="hover:text-[#1DA1D2] text-xl"
+              className="hover:text-[#1DA1D2] text-xl cursor-pointer"
               aria-current="page"
               to={`/user/${currentUser.id}/guide`}
             >
@@ -123,34 +123,51 @@ setAvata(!avata)
           }
             
               <li className="px-3 py-2">
-                <NavLink
-                  className="hover:text-[#1DA1D2] text-xl"
+                <Link
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
                   aria-current="page"
-                  to="/"
+                  to="coach"
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
+             
+                >
+                  Our Coach
+                </Link>
+              </li>
+              <li className="px-3 py-2">
+                <Link
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
+                  aria-current="page"
+                  to="subscriptions"
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
+             
+                >
+                  Subscriptions
+                </Link>
+              </li>
+              
+              <li className="px-3 py-2">
+                <Link
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
+                  aria-current="page"
+                  to="contactus"
+                  spy={true}
+                  smooth={true}
+                  offset={50}
+                  duration={500}
+             
                 >
                   CONTACT US
-                </NavLink>
+                </Link>
               </li>
               {currentUser ? (
                 <>
-                  {/* <li className="px-3 py-2">
-                    <button
-                      className="text-lg font-bold hover:text-[#1DA1D2]"
-                      onClick={() => logoutUser()}
-                    >
-                      Logout
-                    </button>
-                  </li>
-                  <li className="px-3 py-2">
-                    <NavLink
-                      className="text-[#1DA1D2] text-xl font-bold hover:text-white"
-                      to="#"
-                    >
-                      {currentUser?.name}
-                    </NavLink>
-                  </li> */}
-                  {/* drop down start   */}
-                  {/* ---------- */}
+                 
 
           
                   <TEDropdown className="flex justify-center">
