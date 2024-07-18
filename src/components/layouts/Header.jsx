@@ -23,7 +23,9 @@ export default function Header() {
   const location = useLocation();
   const navigate = useNavigate();
  
-  const {avata,setAvata, accessToken, setAccessToken, currentUser, setCurrentUser } =
+  const {
+    subscriptionPlans,
+    weight,userSubscriptionId,avata,setAvata, accessToken, setAccessToken, currentUser, setCurrentUser } =
     useContext(AuthContext);
 
   const logoutUser = async () => {
@@ -110,7 +112,7 @@ setAvata(!avata)
                 </Link>
               </li>
           {
-            currentUser?.subscription_id
+            currentUser?.subscription_id 
             ?   <li className="px-3 py-2">
             <NavLink
               className="hover:text-[#1DA1D2] text-xl cursor-pointer"

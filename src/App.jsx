@@ -38,9 +38,9 @@ function App() {
   const [meals, setMeals] = useState(null);
   const [workouts, setWorkouts] = useState(null);
   const [locations, setLocations] = useState(null);
-  const [profileImg,setProfileImg]=useState('')
-  const [progress,setprogress]=useState(1)
-  const [avata,setAvata]=useState(false)
+  const [profileImg, setProfileImg] = useState("");
+  const [progress, setprogress] = useState(1);
+  const [avata, setAvata] = useState(false);
   const [modalopen, setModalOpen] = useState(false);
   const [modaldata, setModalData] = useState({});
   //eg-fetch subscriptions
@@ -50,7 +50,7 @@ function App() {
         const response = await axios.get(`${BASE_URL}/subscriptions/`);
         setSubscriptionPlans(response.data.data);
       } catch (error) {
-        console.log('Error fetching subscription plans:', error);
+        console.log("Error fetching subscription plans:", error);
       }
     };
 
@@ -61,15 +61,19 @@ function App() {
   useEffect(() => {
     const fetchCurrentlyLoggedInUser = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/user`, getConfig(accessToken));
+        const response = await axios.get(
+          `${BASE_URL}/user`,
+          getConfig(accessToken)
+        );
         setCurrentUser(response.data.user);
+    
       } catch (error) {
         if (error?.response?.status === 401) {
           localStorage.removeItem("currentToken");
           setCurrentUser(null);
           setAccessToken("");
         } else {
-          console.log('Error fetching currently logged in user:', error);
+          console.log("Error fetching currently logged in user:", error);
         }
       }
     };
@@ -79,17 +83,24 @@ function App() {
     }
   }, [accessToken, setCurrentUser, setAccessToken]);
 
-
-  
-   // fetch product
-   useEffect(() => {
+  // fetch product
+  useEffect(() => {
     const fetchWorkoutsAndMeals = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/user/${currentUser.id}`);
+        const response = await axios.get(`${BASE_URL}/user/${currentUser.id}` ,  // Send data as the second argument for PUT request
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${accessToken}`
+            }
+          });
 
-        if (response.data && response.data.user && response.data.user.subscriptions) {
+        if (
+          response.data &&
+          response.data.user &&
+          response.data.user.subscriptions
+        ) {
           const { workoutPlans, mealPlans } = response.data.user.subscriptions;
-
 
           if (workoutPlans) {
             localStorage.setItem("workouts", JSON.stringify(workoutPlans));
@@ -97,23 +108,19 @@ function App() {
           if (mealPlans) {
             localStorage.setItem("meals", JSON.stringify(mealPlans));
           }
-          if(localStorage.getItem("progress")){
-
+          if (localStorage.getItem("progress")) {
           }
-         
 
-  
           let workoutData = localStorage.getItem("workouts");
           let mealData = localStorage.getItem("meals");
 
-        
           setWorkouts(JSON.parse(workoutData));
           setMeals(JSON.parse(mealData));
         } else {
-          console.log('No subscriptions found for the user.');
+          console.log("No subscriptions found for the user.");
         }
       } catch (error) {
-        console.log('Error fetching workouts and meals:', error);
+        console.log("Error fetching workouts and meals:", error);
       }
     };
 
@@ -122,17 +129,15 @@ function App() {
     }
   }, [currentUser]);
 
- 
-  
-  
-
   return (
     <AuthContext.Provider
       value={{
-        modaldata, setModalData,
+        modaldata,
+        setModalData,
         modalopen,
-setModalOpen,
-        avata,setAvata,
+        setModalOpen,
+        avata,
+        setAvata,
         accessToken,
         setAccessToken,
         currentUser,
@@ -160,35 +165,31 @@ setModalOpen,
         setMeals,
         workouts,
         setWorkouts,
-        profileImg,setProfileImg,
-        progress,setprogress
-
+        profileImg,
+        setProfileImg,
+        progress,
+        setprogress,
       }}
     >
       <BrowserRouter>
         <Routes>
-        
           <Route path="/" element={<NavBar></NavBar>}>
-            <Route index  element={<Home />} />
+            <Route index element={<Home />} />
 
             <Route path="/login" element={<Login />} />
-         
 
             <Route path="/register" element={<Register />} />
 
-            <Route path="/api/user" element={<UserIndex />} >
-            
-            </Route>
+            <Route path="/api/user" element={<UserIndex />}></Route>
 
             <Route path="/user/:id/guide" element={<FitnessFusionGuide />} />
 
             <Route path="/user/:id/checkout" element={<CheckOut />} />
 
-<Route path="/user/subscriptions" element={<Subscription />} />
-            
+            <Route path="/user/subscriptions" element={<Subscription />} />
 
             <Route path="/user/:id/bmi" element={<CalculateBMI />} />
-            <Route path="/user/:id/profile/edit" element={<EditProfile/>} />
+            <Route path="/user/:id/profile/edit" element={<EditProfile />} />
 
             <Route
               path="/user/guide/days"
@@ -200,14 +201,7 @@ setModalOpen,
               element={<FitnessFusionGuide_Daily_id />}
             />
 
-            <Route
-              path="*"
-              element={<ErrorRoute></ErrorRoute>}
-            />
-          
-
-
-
+            <Route path="*" element={<ErrorRoute></ErrorRoute>} />
           </Route>
         </Routes>
       </BrowserRouter>

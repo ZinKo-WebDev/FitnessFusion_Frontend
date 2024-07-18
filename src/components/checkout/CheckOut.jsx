@@ -38,6 +38,7 @@ const CheckOut = () => {
     setMeals,
     workouts,
     setWorkouts,
+   
     userSubscriptionId,
     error,
     setErrors,
@@ -45,22 +46,41 @@ const CheckOut = () => {
   } = useContext(AuthContext);
   console.log(userSubscriptionId);
   
-  const addSubscription = async (e, subsID) => {
+  const addSubscriptionToDatabase = async (e) => {
     e.preventDefault();
     const data = {
-      subscription_id: subsID,
+      subscription_id: userSubscriptionId,
     };
     console.log(data);
     try {
-      const response = await axios.put(
+      const response = await axios.post(
         `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
-        data
+        data,  // Send data as the second argument for PUT request
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${accessToken}`
+          }
+        }
       );
+     
+     
       toast.success(response.data.message);
       navigate(`/user/${currentUser.id}/bmi`);
     } catch (error) {
-      if (error?.response?.status) {
+      if (error?.response) {
+        if (error.response.status === 400) {
+          toast.error("Bad request. Please check your data.");
+        } else if (error.response.status === 401) {
+          toast.error("Unauthorized. Please log in.");
+        } else if (error.response.status === 404) {
+          toast.error("User not found.");
+        } else {
+          toast.error("An error occurred. Please try again.");
+        }
         setErrors(error.response.data.errors);
+      } else {
+        toast.error("Network error. Please check your connection.");
       }
       console.log(error);
     }
@@ -94,7 +114,7 @@ const CheckOut = () => {
           </div>
         </div>
 
-        <form className="mt-8">
+        <form className="mt-8" >
           <div className="grid gap-6">
             <div className="flex bg-white border-b border-gray-300 focus-within:border-blue-600 overflow-hidden">
               <svg
@@ -192,7 +212,7 @@ const CheckOut = () => {
                 htmlFor="remember-me"
                 className="ml-3 block text-lg text-white font-medium "
               >
-                I accept the{" "}
+                I accept the
                 <a
                   href="javascript:void(0);"
                   className="text-blue-600 font-semibold hover:underline ml-1"
@@ -212,12 +232,10 @@ const CheckOut = () => {
             </button>
 
             <button
-              onClick={(e) => {
-                addSubscription(e, currentUser.id);
-              }}
+              onClick={e=>addSubscriptionToDatabase(e)}
               className="min-w-[150px] px-6 py-3.5 text-sm bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
             >
-              {" "}
+            
               Confirm payment
             </button>
           </div>

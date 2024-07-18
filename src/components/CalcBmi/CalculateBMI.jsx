@@ -40,40 +40,104 @@ const CalculateBMI = () => {
     setProfileImg,
   } = useContext(AuthContext);
 
-  const { user } = currentUser;
+ 
   const generateBmi = (e) => {
     e.preventDefault();
     const bmi = weight / (height * height);
     const finalBmi = Math.ceil(bmi * 10000);
     setBmi(finalBmi);
   };
-  const handleBmiSubmit = (e) => {
-    e.preventDefault();
+//  --------
+const storeImageHandler = async (e) => {
+  e.preventDefault();
+  const dataImg = {
+
+    image:image
   };
-  const storeAndGoNextHandler = async (e) => {
+ 
+
+  try {
+    const response = await axios.post(
+      `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
+      dataImg,  // Send data as the second argument for PUT request
+      {
+        headers: {
+          'Content-Type' : 'multipart/form-data',
+
+          "Authorization": `Bearer ${accessToken}`
+        }
+      }
+    );
+ 
+    
+    toast.success(response.data.message);
+
+  } catch (error) {
+    if (error?.response) {
+      if (error.response.status === 400) {
+        toast.error("Bad request. Please check your data.");
+      } else if (error.response.status === 401) {
+        toast.error("Unauthorized. Please log in.");
+      } else if (error.response.status === 404) {
+        toast.error("User not found.");
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
+      setErrors(error.response.data.errors);
+    } else {
+      toast.error("Network error. Please check your connection.");
+    }
+    console.log(error);
+  }
+};
+  // --------
+  const storeBmiHandler = async (e) => {
     e.preventDefault();
+  
     const data = {
       BMI: bmi,
       weight: weight,
       height: height,
-      image:image
+
     };
     console.log(data);
-    // try {
-    //   const response = await axios.put(
-    //     `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
-    //     data
-    //   );
-    //   toast.success(response.data.message);
-    //   console.log(currentUser.id);
-    //   navigate(`/`);
-    // } catch (error) {
-    //   if (error?.response?.status) {
-    //     setErrors(error.response.data.errors);
-    //   }
-    //   console.log(error);
-    // }
+    try {
+    
+      const response = await axios.post(
+        `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
+        data,  // Send data as the second argument for PUT request
+        {
+          headers: {
+            'Content-Type' : 'application/json',
+  
+            "Authorization": `Bearer ${accessToken}`
+          }
+        }
+      );
+      
+      toast.success(response.data.message);
+      navigate(`/`);
+      location.reload();
+    } catch (error) {
+      if (error?.response) {
+        if (error.response.status === 400) {
+          toast.error("Bad request. Please check your data.");
+        } else if (error.response.status === 401) {
+          toast.error("Unauthorized. Please log in.");
+        } else if (error.response.status === 404) {
+          toast.error("User not found.");
+        } else {
+          toast.error("An error occurred. Please try again.");
+        }
+        setErrors(error.response.data.errors);
+      } else {
+        toast.error("Network error. Please check your connection.");
+      }
+      console.log(error);
+    }
   };
+  // --------
+
 
   console.log(currentUser);
 
@@ -89,14 +153,14 @@ const CalculateBMI = () => {
             <div className="h-[2px] bg-[#1DA1D2] mt-[-10px] mr-10 w-[170px]"></div>
             <div className="h-[2px] bg-[#1DA1D2] mt-[-10px] mr-10 w-[70px]"></div>
           </div>
-
           <form
             action=""
             className=""
             onSubmit={(e) => {
-              storeAndGoNextHandler(e);
+              storeImageHandler(e);
             }}
           >
+            <div className="flex items-center space-x-6 my-3">
             <div className="flex items-center space-x-6 my-3">
               <div className="shrink-0">
                 <img
@@ -125,8 +189,19 @@ const CalculateBMI = () => {
                     setImage(event.target.files[0]);
                   }}
                 />
+               <button type="submit">Upload Image</button>
               </label>
-            </div>
+              </div>
+              </div>
+          </form>
+          <form
+            action=""
+            className=""
+            onSubmit={(e) => {
+              storeBmiHandler(e);
+            }}
+          >
+        
             <div className="py-2">
               <label className="font-poppin font-bold py-5" htmlFor="">
                 Height

@@ -12,13 +12,15 @@ import React, {
 const Subscription = () => {
   const navigate = useNavigate();
 
-  const { setUserSubscriptionId, subscriptionPlans, currentUser } =
+  const { userSubscriptionId,setUserSubscriptionId, subscriptionPlans, currentUser } =
     useContext(AuthContext);
 
   const addSubscription = async (e, subsID) => {
-    if(currentUser){
+    console.log(subsID)
+    e.preventDefault()
+    if(currentUser && subsID){
     setUserSubscriptionId(subsID);
-    console.log(subsID);
+    console.log("subscription file",userSubscriptionId);
     navigate(`/user/${currentUser.id}/checkout`)
     }else{
     navigate(`/register`);}

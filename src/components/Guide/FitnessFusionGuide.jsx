@@ -8,10 +8,6 @@ import GuideDetails from "./GuideDetails";
 
 const FitnessFusionGuide = () => {
   
- 
- 
- 
-  
   const [finishedWorkouts,setFinishedWorkouts]=useState([])
   const [finishedMeals,setMinishedMeals]=useState([])
   const navigate = useNavigate();

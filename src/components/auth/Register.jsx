@@ -24,13 +24,7 @@ export default function Register() {
   }, [accessToken]);
 
   const handleSubmit = async (e) => {
-    console.log({
-      name,
-      email,
-      password,
-      age,
-      gender,
-    });
+  
     e.preventDefault();
     setErrors(null);
     setLoading(true);
