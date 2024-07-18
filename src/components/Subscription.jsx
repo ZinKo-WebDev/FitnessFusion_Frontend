@@ -119,6 +119,7 @@ const Subscription = () => {
               >
                 Buy Now
               </button>
+              <span>{subsPlans.id}</span>
             </div>
           );
         })}

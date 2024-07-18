@@ -4,12 +4,20 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import { Progress } from "@material-tailwind/react";
+import GuideDetails from "./GuideDetails";
+
 const FitnessFusionGuide = () => {
+  
+ 
+ 
+ 
   
   const [finishedWorkouts,setFinishedWorkouts]=useState([])
   const [finishedMeals,setMinishedMeals]=useState([])
   const navigate = useNavigate();
   const {
+    modalopen,
+setModalOpen,
     accessToken,
     setAccessToken,
     currentUser,
@@ -37,8 +45,12 @@ const FitnessFusionGuide = () => {
     workouts,
     setWorkouts,
     profileImg,setProfileImg,
-    progress,setprogress
+    progress,setprogress,
+    modaldata, setModalData
   } = useContext(AuthContext);
+  const handleOpen = (e,job) =>{
+    setModalData(job)
+    setModalOpen(!modalopen)};
 
   const mealStatusHandler = (event, mealID) => {
     setprogress(prevProgress => (prevProgress <= 99 ? prevProgress + 11 : 100));
@@ -94,8 +106,8 @@ const FitnessFusionGuide = () => {
  
   return (
     <div className=" ">
-{console.log(workouts)}
-{console.log(meals)}
+         <GuideDetails handleOpen={handleOpen}/>
+
       <div className="flex justify-center items-center">
         <img className="w-full h-[800px]" src={main_bg2} alt="main_bg2" />
         <div className="w-[1290px] h-[420px] my-transparant-bg absolute mt-12">
@@ -118,7 +130,7 @@ const FitnessFusionGuide = () => {
           {
             meals?.map((meal) =>{
               return (
-                <li key={meal?.id} className="relative flex flex-col sm:flex-row xl:flex-col items-start">
+                <li  onClick={(e) => handleOpen(e,meal)} key={meal?.id} className="relative flex flex-col sm:flex-row xl:flex-col items-start">
                 <div className="order-1 sm:ml-6 xl:ml-0 ">
                   <h3 className="mb-1 text-slate-900 font-semibold ">
                     <span className="mb-1 block leading-6 text-[#1DA1D2] text-3xl font-bebas">
@@ -169,7 +181,7 @@ const FitnessFusionGuide = () => {
         {
             workouts?.map((workout) =>{
               return (
-                <li key={workout?.id} className="relative flex flex-col sm:flex-row xl:flex-col items-start">
+                <li onClick={(e) => handleOpen(e,workout)} key={workout?.id} className="relative flex flex-col sm:flex-row xl:flex-col items-start">
                 <div className="order-1 sm:ml-6 xl:ml-0 ">
                   <h3 className="mb-1 text-slate-900 font-semibold ">
                     <span className="mb-1 block leading-6 text-[#1DA1D2] text-3xl font-bebas">
@@ -211,6 +223,7 @@ const FitnessFusionGuide = () => {
       
         
         </div> */}
+     
       <Footer></Footer>
     </div>
   );

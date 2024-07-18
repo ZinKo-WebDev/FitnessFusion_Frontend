@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
-import profileimg from '../../images/profile.jpg'
+import profileimg from "../../images/profile.jpg";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const CalculateBMI = () => {
-
   const navigate = useNavigate();
   const {
     accessToken,
@@ -35,51 +34,51 @@ const CalculateBMI = () => {
     setMeals,
     workouts,
     setWorkouts,
-    error,setErrors,
-    profileImg,setProfileImg
+    error,
+    setErrors,
+    profileImg,
+    setProfileImg,
   } = useContext(AuthContext);
-  const {user}=currentUser;
-const generateBmi=(e) => {
-  e.preventDefault()
-  const bmi= weight/(height*height)
-  const finalBmi=Math.ceil(bmi*10000)
-  setBmi(finalBmi);
-}
-  const handleBmiSubmit=(e) =>{
-    e.preventDefault()
 
-  } 
+  const { user } = currentUser;
+  const generateBmi = (e) => {
+    e.preventDefault();
+    const bmi = weight / (height * height);
+    const finalBmi = Math.ceil(bmi * 10000);
+    setBmi(finalBmi);
+  };
+  const handleBmiSubmit = (e) => {
+    e.preventDefault();
+  };
   const storeAndGoNextHandler = async (e) => {
     e.preventDefault();
     const data = {
-      BMI:bmi,
-      weight:weight,
-      height:height,
-    
+      BMI: bmi,
+      weight: weight,
+      height: height,
+      image:image
     };
     console.log(data);
-    try {
-      const response = await axios.put(
-        `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
-        data
-      );
-      toast.success(response.data.message);
-      console.log(currentUser.id)
-      navigate(`/`);
-    } catch (error) {
-      if (error?.response?.status) {
-        setErrors(error.response.data.errors);
-      }
-      console.log(error);
-    }
+    // try {
+    //   const response = await axios.put(
+    //     `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
+    //     data
+    //   );
+    //   toast.success(response.data.message);
+    //   console.log(currentUser.id);
+    //   navigate(`/`);
+    // } catch (error) {
+    //   if (error?.response?.status) {
+    //     setErrors(error.response.data.errors);
+    //   }
+    //   console.log(error);
+    // }
   };
 
-console.log(currentUser)
+  console.log(currentUser);
 
   return (
-   
     <div className="p-12 flex justify-center items-center mt-[100px]">
-    
       <div className="p-12 flex justify-center items-center">
         <div className="">
           <h1 className="text-[90px] font-bebas">
@@ -97,18 +96,22 @@ console.log(currentUser)
             onSubmit={(e) => {
               storeAndGoNextHandler(e);
             }}
-            
           >
             <div className="flex items-center space-x-6 my-3">
               <div className="shrink-0">
-                
-              <img src={profileimg} alt='profile.img' height="200" id="preview_img"
-                  className="h-20 w-20 object-cover rounded-full"/>
+                <img
+                  src={profileimg}
+                  alt="profile.img"
+                  height="200"
+                  id="preview_img"
+                  className="h-20 w-20 object-cover rounded-full"
+                />
               </div>
               <label className="block">
                 <span className="sr-only">Choose profile photo</span>
                 <input
-                  type="file"
+                  type="file" 
+                  name="image"
                   className="block w-full text-sm text-slate-500
         file:mr-4 file:py-2 file:px-4
         file:rounded-full file:border-0
@@ -116,12 +119,11 @@ console.log(currentUser)
         file:bg-violet-50 file:text-violet-700
         hover:file:bg-violet-100
       "
-      // form image to image state 
-      // onChange={(event) => {
-      //   console.log(event.target.files[0]); 
-      //   setImage(event.target.files[0]); 
-      // }}
-            
+                  // form image to image state
+                  onChange={(event) => {
+                    console.log(event.target.files[0]);
+                    setImage(event.target.files[0]);
+                  }}
                 />
               </label>
             </div>
@@ -154,7 +156,10 @@ console.log(currentUser)
               />
             </div>
 
-            <button onClick={(e) => generateBmi(e) } className="text-red-600 border-2 border-red-500 px-3 py-2">
+            <button
+              onClick={(e) => generateBmi(e)}
+              className="text-red-600 border-2 border-red-500 px-3 py-2"
+            >
               Generate Your BMI
             </button>
             <span>Please Do not Skil This.</span>
@@ -169,7 +174,6 @@ console.log(currentUser)
                 name="bmi"
                 id="bmi"
                 placeholder="BMI"
-             
                 value={bmi}
                 readOnly
               />

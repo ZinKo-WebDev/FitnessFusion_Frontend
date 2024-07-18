@@ -32,7 +32,7 @@ function App() {
   const [gender, setGender] = useState(null);
   const [height, setHeight] = useState(null);
   const [weight, setWeight] = useState(null);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState([]);
   const [goal, setGoal] = useState(null);
   const [task, setTask] = useState(null);
   const [meals, setMeals] = useState(null);
@@ -41,6 +41,8 @@ function App() {
   const [profileImg,setProfileImg]=useState('')
   const [progress,setprogress]=useState(1)
   const [avata,setAvata]=useState(false)
+  const [modalopen, setModalOpen] = useState(false);
+  const [modaldata, setModalData] = useState({});
   //eg-fetch subscriptions
   useEffect(() => {
     const fetchAllSubscriptions = async () => {
@@ -127,6 +129,9 @@ function App() {
   return (
     <AuthContext.Provider
       value={{
+        modaldata, setModalData,
+        modalopen,
+setModalOpen,
         avata,setAvata,
         accessToken,
         setAccessToken,
@@ -157,6 +162,7 @@ function App() {
         setWorkouts,
         profileImg,setProfileImg,
         progress,setprogress
+
       }}
     >
       <BrowserRouter>

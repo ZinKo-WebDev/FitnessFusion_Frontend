@@ -1,6 +1,73 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../context/authContext';
 
 const EditProfile = () => {
+    const {
+        accessToken,
+        setAccessToken,
+        currentUser,
+        setCurrentUser,
+        subscription,
+        setSubscription,
+        age,
+        setAge,
+        bmi,
+        setBmi,
+        gender,
+        setGender,
+        height,
+        setHeight,
+        weight,
+        setWeight,
+        image,
+        setImage,
+        goal,
+        setGoal,
+        task,
+        setTask,
+        meals,
+        setMeals,
+        workouts,
+        setWorkouts,
+        error,setErrors,
+        profileImg,setProfileImg
+      } = useContext(AuthContext);
+      
+      const generateBmi=(e) => {
+        e.preventDefault()
+        const bmi= weight/(height*height)
+        const finalBmi=Math.ceil(bmi*10000)
+        setBmi(finalBmi);
+      }
+        const handleBmiSubmit=(e) =>{
+          e.preventDefault()
+      
+        } 
+        const storeAndGoNextHandler = async (e) => {
+          e.preventDefault();
+          const data = {
+            BMI:bmi,
+            weight:weight,
+            height:height,
+          
+          };
+          console.log(data);
+          try {
+            const response = await axios.put(
+              `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
+              data
+            );
+            toast.success(response.data.message);
+            console.log(currentUser.id)
+            navigate(`/`);
+          } catch (error) {
+            if (error?.response?.status) {
+              setErrors(error.response.data.errors);
+            }
+            console.log(error);
+          }
+        };
+      console.log(currentUser);
   return (
     <div className="bg-white w-full flex flex-col gap-5 px-3 md:px-16 lg:px-28 md:flex-row text-[#161931] pt-[70px]">
     <aside className="hidden py-4 md:w-1/3 lg:w-1/4 md:block">
@@ -84,45 +151,64 @@ const EditProfile = () => {
                             </div>
 
                         </div>
+                        <div
+                            className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                            <div className="w-full">
+                                <label for="height"
+                                    className="block mb-2 text-sm font-medium text-indigo-900 dark:text-slate-700"> Height</label>
+                                <input type="number" id="height"
+                                    className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                    value={""}  required/>
+                            </div>
+
+                            <div className="w-full">
+                                <label for="weight"
+                                    className="block mb-2 text-sm font-medium text-indigo-900 dark:text-slate-700">Current Weight</label>
+                                <input type="number" id="weight"
+                                    className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                    placeholder="kg"  required/>
+                            </div>
+
+                        </div>
+                     
+                        <div
+                            className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
+                            <div className="w-full">
+                                <label for="bmi"
+                                    className="block mb-2 text-sm font-medium text-indigo-900 dark:text-slate-700"> BMI</label>
+                                <input type="number" id="bmi"
+                                    className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                    value={""}  required/>
+                            </div>
+
+                            <div className="w-full">
+                                <label for="goal_weight"
+                                    className="block mb-2 text-sm font-medium text-indigo-900 dark:text-slate-700">Goal Weight</label>
+                                <input type="number" id="goal_weight"
+                                    className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
+                                    placeholder="kg"  required/>
+                            </div>
+
+                        </div>
                      
 
                       
 
-                        <div className="mb-2 sm:mb-6">
-                            <label for="password"
-                                className="block mb-2 text-sm font-medium text-indigo-900 dark:text-slate-700">Old Password</label>
-                            <input type="password" id="password"
-                                className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                placeholder="abcd1234!@#" required/>
-                        </div>
-                        <div
-                            className="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                            <div className="w-full">
-                                <label for="password"
-                                    className="block mb-2 text-sm font-medium text-indigo-900 dark:text-slate-700">New Password</label>
-                                <input type="password" id="password"
-                                    className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                    placeholder='!@78ASDF' required/>
-                            </div>
-
-                            <div className="w-full">
-                                <label for="confirm_password"
-                                    className="block mb-2 text-sm font-medium text-indigo-900 dark:text-slate-700">Confirm Password</label>
-                                <input type="password" id="confirm_password"
-                                    className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                                    placeholder='!@78ASDF' required/>
-                            </div>
-
-                        </div>
+                   
 
 
 
-                        <div className="flex justify-end">
+                        <div className="flex justify-between">
+                     
+                            <button onClick={(e) => generateBmi(e) } type="submit"
+                                className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800 ">Calculate BMI</button>
+                       
                             <button type="submit"
-                                className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Save</button>
+                                className="text-white bg-indigo-700  hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Edit</button>
                         </div>
-
-                    </div>
+   
+</div>
+                 
                 </div>
             </div>
         </div>
