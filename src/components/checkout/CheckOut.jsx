@@ -55,7 +55,7 @@ const CheckOut = () => {
     try {
       const response = await axios.post(
         `http://127.0.0.1:8000/api/user/${currentUser.id}/edit`,
-        data,  // Send data as the second argument for PUT request
+        data, 
         {
           headers: {
             "Content-Type": "application/json",

@@ -9,35 +9,17 @@ const CalculateBMI = () => {
   const navigate = useNavigate();
   const {
     accessToken,
-    setAccessToken,
     currentUser,
-    setCurrentUser,
-    subscription,
-    setSubscription,
-    age,
-    setAge,
     bmi,
     setBmi,
-    gender,
-    setGender,
     height,
     setHeight,
     weight,
     setWeight,
     image,
     setImage,
-    goal,
-    setGoal,
-    task,
-    setTask,
-    meals,
-    setMeals,
-    workouts,
-    setWorkouts,
-    error,
     setErrors,
-    profileImg,
-    setProfileImg,
+
   } = useContext(AuthContext);
 
  

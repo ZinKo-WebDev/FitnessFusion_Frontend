@@ -19,6 +19,11 @@ import ErrorRoute from "./components/ErrorRoute/ErrorRoute";
 import UserIndex from "./components/user/UserIndex";
 import ProfileEdit from "./components/auth/ProfileEdit";
 import EditProfile from "./components/auth/EditProfile";
+import Main from "./components/Main";
+import Activities from "./Activities/Activities";
+import About from "./components/About";
+import Trainer from "./components/Trainer";
+import Footer from "./components/footer/Footer";
 
 function App() {
   const [accessToken, setAccessToken] = useState(
@@ -100,22 +105,17 @@ function App() {
           response.data.user &&
           response.data.user.subscriptions
         ) {
-          const { workoutPlans, mealPlans } = response.data.user.subscriptions;
+     setWorkouts(response.data.user.subscriptions.workoutPlans)
+     setMeals(response.data.user.subscriptions.mealPlans)
+        
 
-          if (workoutPlans) {
-            localStorage.setItem("workouts", JSON.stringify(workoutPlans));
-          }
-          if (mealPlans) {
-            localStorage.setItem("meals", JSON.stringify(mealPlans));
-          }
-          if (localStorage.getItem("progress")) {
-          }
+         
+// get meal data from local
+          // let workoutData = localStorage.getItem("workouts");
+          // let mealData = localStorage.getItem("meals");
 
-          let workoutData = localStorage.getItem("workouts");
-          let mealData = localStorage.getItem("meals");
-
-          setWorkouts(JSON.parse(workoutData));
-          setMeals(JSON.parse(mealData));
+          // setWorkouts(JSON.parse(workoutData));
+          // setMeals(JSON.parse(mealData));
         } else {
           console.log("No subscriptions found for the user.");
         }
@@ -175,18 +175,23 @@ function App() {
         <Routes>
           <Route path="/" element={<NavBar></NavBar>}>
             <Route index element={<Home />} />
-
+           
+            
             <Route path="/login" element={<Login />} />
 
             <Route path="/register" element={<Register />} />
 
             <Route path="/api/user" element={<UserIndex />}></Route>
+            <Route path="/about" element={<About />}></Route>
+            <Route path="/trainer" element={<Trainer />}></Route>
+            <Route path="/user/:id/activity" element={<Activities />}></Route>
 
             <Route path="/user/:id/guide" element={<FitnessFusionGuide />} />
 
             <Route path="/user/:id/checkout" element={<CheckOut />} />
 
             <Route path="/user/subscriptions" element={<Subscription />} />
+            <Route path="/contactus" element={<Footer />} />
 
             <Route path="/user/:id/bmi" element={<CalculateBMI />} />
             <Route path="/user/:id/profile/edit" element={<EditProfile />} />

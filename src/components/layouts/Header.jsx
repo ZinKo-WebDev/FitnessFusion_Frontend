@@ -55,6 +55,7 @@ setAvata(!avata)
   const goProfileHandler=(e) => {
     navigate(`/user/${currentUser.id}/profile/edit`)
   }
+ 
   // console.log(currentUser)
   return (
     <div className="relative ">
@@ -91,25 +92,21 @@ setAvata(!avata)
                   className="hover:text-[#1DA1D2] text-xl cursor-pointer"
                   aria-current="page"
                   to="/"
+                  
                 >
                   HOME
                 </NavLink>
               </li>
 
               <li className="px-3 py-2">
-                <Link
+              <NavLink
                   className="hover:text-[#1DA1D2] text-xl cursor-pointer"
                   aria-current="page"
-                  to="aboutPage"
-                  spy={true}
-                  smooth={true}
-                  offset={50}
-                  duration={500}
-             
-
+                  to="/about"
+                  
                 >
-                  ABOUT US
-                </Link>
+                  About
+                </NavLink>
               </li>
           {
             currentUser?.subscription_id 
@@ -125,48 +122,41 @@ setAvata(!avata)
           }
             
               <li className="px-3 py-2">
-                <Link
+                <NavLink
                   className="hover:text-[#1DA1D2] text-xl cursor-pointer"
                   aria-current="page"
-                  to="coach"
-                  spy={true}
-                  smooth={true}
-                  offset={50}
-                  duration={500}
+                  to="/user/:id/activity"
+                 
              
                 >
-                  Our Coach
-                </Link>
+                 Activitiy
+                </NavLink>
               </li>
               <li className="px-3 py-2">
-                <Link
+              <NavLink
                   className="hover:text-[#1DA1D2] text-xl cursor-pointer"
                   aria-current="page"
-                  to="subscriptions"
-                  spy={true}
-                  smooth={true}
-                  offset={50}
-                  duration={500}
-             
+                  to="/trainer"
+                  
                 >
-                  Subscriptions
-                </Link>
+                  Trainers
+                </NavLink>
               </li>
+              {
+                userSubscriptionId? <li className="px-3 py-2">
+                <NavLink
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
+                  aria-current="page"
+                  to="/user/subscriptions"
+                  
+                >
+                  HOME
+                </NavLink>
+              </li>:""
+              }
               
-              <li className="px-3 py-2">
-                <Link
-                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
-                  aria-current="page"
-                  to="contactus"
-                  spy={true}
-                  smooth={true}
-                  offset={50}
-                  duration={500}
-             
-                >
-                  CONTACT US
-                </Link>
-              </li>
+              
+           
               {currentUser ? (
                 <>
                  
@@ -175,8 +165,8 @@ setAvata(!avata)
                   <TEDropdown className="flex justify-center">
     <TERipple rippleColor="light">
       <TEDropdownToggle className=" rounded-full flex items-center whitespace-nowrap  bg-primary  text-xs font-medium uppercase leading-normal text-white ">
-       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDR8H0rgV-zmSodkT_erGjzA_VhfWE22Pg7Q&s" alt="profileImg" className="w-16 h-16 rounded-full"/>
-       
+       <img src={currentUser ? "http://localhost:8000/"+currentUser.image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDR8H0rgV-zmSodkT_erGjzA_VhfWE22Pg7Q&s"} alt="profileImg" className="w-16 h-16 rounded-full"/>
+      
       </TEDropdownToggle>
     </TERipple>
 
