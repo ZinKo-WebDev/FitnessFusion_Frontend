@@ -81,13 +81,13 @@ const FitnessFusionGuide = () => {
   }, [meals]); // useEffect dependency on meals state change
  
   const getRandomWorkouts = (workouts, count) => {
-    if (meals.length === 0) return []; // Handle empty meals array scenario
+    if (workouts.length === 0) return []; // Handle empty meals array scenario
     const shuffledWorkouts = workouts.sort(() => 0.5 - Math.random());
     return shuffledWorkouts.slice(0, count);
   };
   useEffect(() => {
     // Update threeMeals state with 3 random meals when meals state changes
-    setSevenWorkouts(getRandomWorkouts(meals, 9));
+    setSevenWorkouts(getRandomWorkouts(workouts, 9));
   }, [workouts]); // useEffect dependency on meals state change
  
  
