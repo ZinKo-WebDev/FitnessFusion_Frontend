@@ -145,13 +145,7 @@ const storeImageHandler = async (e) => {
             <div className="flex items-center space-x-6 my-3">
             <div className="flex items-center space-x-6 my-3">
               <div className="shrink-0">
-                <img
-                  src={profileimg}
-                  alt="profile.img"
-                  height="200"
-                  id="preview_img"
-                  className="h-20 w-20 object-cover rounded-full"
-                />
+                
               </div>
               <label className="block">
                 <span className="sr-only">Choose profile photo</span>
@@ -171,7 +165,7 @@ const storeImageHandler = async (e) => {
                     setImage(event.target.files[0]);
                   }}
                 />
-               <button type="submit">Upload Image</button>
+               <button type="submit" className="text-white bg-[#1DA1D2] px-7 py-2 mt-2">Upload Image</button>
               </label>
               </div>
               </div>
@@ -215,11 +209,11 @@ const storeImageHandler = async (e) => {
 
             <button
               onClick={(e) => generateBmi(e)}
-              className="text-red-600 border-2 border-red-500 px-3 py-2"
+              className="text-white bg-[#1DA1D2] px-7 py-2 mt-2"
             >
               Generate Your BMI
             </button>
-            <span>Please Do not Skil This.</span>
+            <span className="px-3 text-red-500">Please Do not Skil This.</span>
             <div className="py-2">
               <label className="font-poppin font-bold py-5" htmlFor="">
                 BMI
@@ -240,7 +234,7 @@ const storeImageHandler = async (e) => {
               className="text-white bg-[#1DA1D2] px-7 py-2 mt-2"
               type="submit"
             >
-              Calculate
+              Let's Start 
             </button>
           </form>
         </div>

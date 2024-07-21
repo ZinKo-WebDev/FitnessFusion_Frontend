@@ -10,13 +10,14 @@ import { AuthContext } from "../../context/authContext";
 export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [statusConfirm, setStatusConfirm] = useState();
   const [age, setAge] = useState("");
-  const [gender, setGender] = useState("");
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { accessToken, setAccessToken, setCurrentUser } =
+  const { accessToken, setAccessToken, setCurrentUser,password, setPassword } =
     useContext(AuthContext);
 
   useEffect(() => {
@@ -24,11 +25,17 @@ export default function Register() {
   }, [accessToken]);
 
   const handleSubmit = async (e) => {
-  
+    let confirmedPassword;
+    if (password == passwordConfirm) {
+      confirmedPassword = password;
+    } else {
+      confirmedPassword = "";
+      setStatusConfirm(false);
+    }
     e.preventDefault();
     setErrors(null);
     setLoading(true);
-    const data = { name, email, password, age, gender };
+    const data = { name, email, password: confirmedPassword, age };
 
     try {
       const response = await axios.post(`${BASE_URL}/user/register`, data);
@@ -37,6 +44,7 @@ export default function Register() {
         "currentToken",
         JSON.stringify(response.data.currentToken)
       );
+
       setAccessToken(response.data.currentToken);
       setCurrentUser(response.data.user);
       setLoading(false);
@@ -89,6 +97,13 @@ export default function Register() {
                     type="text"
                     className="block w-full rounded-md border-0 py-2 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset text-lg ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-3"
                   />
+                  {useValidation(errors, "name") ? (
+                    <span className="text-red-500 capitalize">
+                      UserName Field Require.
+                    </span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div>
@@ -96,7 +111,7 @@ export default function Register() {
                   htmlFor="email"
                   className="block text-lg font-medium leading-3 text-gray-900"
                 >
-                  Email address
+                  Email
                 </label>
                 <div className="mt-2">
                   <input
@@ -107,6 +122,13 @@ export default function Register() {
                     aria-describedby="emailHelp"
                     className="block w-full rounded-md border-0 py-2 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset text-lg ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-3"
                   />
+                  {/* {useValidation(errors, "email") ? (
+                    <span className="text-red-500 capitalize">
+                      Email Field Require.
+                    </span>
+                  ) : (
+                    ""
+                  )} */}
                 </div>
               </div>
 
@@ -125,7 +147,38 @@ export default function Register() {
                     id="exampleInputPassword1"
                     className="block w-full rounded-md border-0 py-2 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset text-lg ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-3"
                   />
-                  {useValidation(errors, "password")}
+
+                  {useValidation(errors, "password") ? (
+                    <span className="text-red-500 capitalize">
+                      Password Field Require.
+                    </span>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+              <div>
+                <label
+                  htmlFor="password_confirmation"
+                  className="block text-lg font-medium leading-3 text-gray-900"
+                >
+                  Password Confirmation
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="password"
+                    value={passwordConfirm}
+                    onChange={(e) => setPasswordConfirm(e.target.value)}
+                    id="exampleInputPassword_confirmation1"
+                    className="block w-full rounded-md border-0 py-2 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset text-lg ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-3"
+                  />
+                  {statusConfirm == false ? (
+                    <span className="text-red-500 capitalize">
+                      Password Do Not Match.
+                    </span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div>
@@ -147,7 +200,7 @@ export default function Register() {
                 </div>
               </div>
 
-              <div>
+              {/* <div>
                 <label
                   htmlFor="gender"
                   className="block text-lg font-medium leading-3 text-gray-900"
@@ -293,7 +346,7 @@ export default function Register() {
                     </div>
                   </nav>
                 </div>
-              </div>
+              </div> */}
 
               <div>
                 <button

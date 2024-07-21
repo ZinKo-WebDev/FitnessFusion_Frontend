@@ -6,6 +6,7 @@ import { BASE_URL, getConfig } from "../../helpers/config";
 import { toast } from "react-toastify";
 import axios from "axios";
 import main_logo from "../../images/main_logo.png";
+import profile from "../../images/profile.jpg";
 import {
   TEDropdown,
   TEDropdownToggle,
@@ -58,7 +59,7 @@ setAvata(!avata)
  
   // console.log(currentUser)
   return (
-    <div className="relative ">
+    <div className="relative uppercase tracking-wide">
       <nav
         className={
          location.pathname == "/login" || location.pathname == "/register"
@@ -89,7 +90,7 @@ setAvata(!avata)
             <ul className="flex justify-center items-center p-2">
               <li className="px-3 py-2">
                 <NavLink
-                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer active:border-b-2 active:border-[#1DA1D2] focus:border-b-2 focus:border-blue-500 "
                   aria-current="page"
                   to="/"
                   
@@ -100,7 +101,7 @@ setAvata(!avata)
 
               <li className="px-3 py-2">
               <NavLink
-                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer active:border-b-2 active:border-[#1DA1D2] focus:border-b-2 focus:border-blue-500 "
                   aria-current="page"
                   to="/about"
                   
@@ -112,9 +113,9 @@ setAvata(!avata)
             currentUser?.subscription_id 
             ?   <li className="px-3 py-2">
             <NavLink
-              className="hover:text-[#1DA1D2] text-xl cursor-pointer"
+              className="hover:text-[#1DA1D2] text-xl cursor-pointer active:border-b-2 active:border-[#1DA1D2] focus:border-b-2 focus:border-blue-500 "
               aria-current="page"
-              to={`/user/${currentUser.id}/guide`}
+              to={`/user/${currentUser.id}/week`}
             >
               FITNESS & NUTRITION
             </NavLink>
@@ -123,7 +124,7 @@ setAvata(!avata)
             
               <li className="px-3 py-2">
                 <NavLink
-                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer active:border-b-2 active:border-[#1DA1D2] focus:border-b-2 focus:border-blue-500 "
                   aria-current="page"
                   to="/user/:id/activity"
                  
@@ -134,7 +135,7 @@ setAvata(!avata)
               </li>
               <li className="px-3 py-2">
               <NavLink
-                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer active:border-b-2 active:border-[#1DA1D2] focus:border-b-2 focus:border-blue-500 "
                   aria-current="page"
                   to="/trainer"
                   
@@ -145,7 +146,7 @@ setAvata(!avata)
               {
                 userSubscriptionId? <li className="px-3 py-2">
                 <NavLink
-                  className="hover:text-[#1DA1D2] text-xl cursor-pointer"
+                  className="hover:text-[#1DA1D2] text-xl cursor-pointer active:border-b-2 active:border-[#1DA1D2] focus:border-b-2 focus:border-blue-500 "
                   aria-current="page"
                   to="/user/subscriptions"
                   
@@ -160,12 +161,10 @@ setAvata(!avata)
               {currentUser ? (
                 <>
                  
-
-          
-                  <TEDropdown className="flex justify-center">
+                  <TEDropdown className="flex justify-center px-3 ">
     <TERipple rippleColor="light">
       <TEDropdownToggle className=" rounded-full flex items-center whitespace-nowrap  bg-primary  text-xs font-medium uppercase leading-normal text-white ">
-       <img src={currentUser ? "http://localhost:8000/"+currentUser.image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDR8H0rgV-zmSodkT_erGjzA_VhfWE22Pg7Q&s"} alt="profileImg" className="w-16 h-16 rounded-full"/>
+       <img src={!currentUser.image ?profile: "http://localhost:8000/"+currentUser.image} alt="profileImg" className="w-16 h-16 rounded-full"/>
       
       </TEDropdownToggle>
     </TERipple>
@@ -196,7 +195,7 @@ setAvata(!avata)
                 <>
                   <li className="px-3 py-2">
                     <NavLink
-                      className="btn btn-primary rounded-3xl bg-blue-600 px-6 py-2"
+                      className="btn btn-primary rounded-2xl bg-blue-600 px-9 py-3"
                       to="/login"
                     >
                       Join Now

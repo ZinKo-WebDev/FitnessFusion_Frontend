@@ -8,19 +8,20 @@ import { useEffect, useState } from "react";
 import { getConfig, BASE_URL } from "./helpers/config";
 import { AuthContext } from "./context/authContext";
 import axios from "axios";
-import FitnessFusionGuide from "./components/Guide/FitnessFusionGuide";
 import CheckOut from "./components/checkout/CheckOut";
 import Subscription from "./components/Subscription";
 import CalculateBMI from "./components/CalcBmi/CalculateBMI";
 import FitnessFusionGuide_Daily from "./components/Guide/FitnessFusionGuide_Daily";
-import FitnessFusionGuide_Daily_id from "./components/Guide/FitnessFusionGuide_Daily_id";
+import FitnessFusionGuide_HowTo from "./components/Guide/FitnessFusionGuide_HowTo";
+import FitnessFusionGuide from "./components/Guide/FitnessFusionGuide";
+
 import UserRoutineIndex from "./components/userRoutine/UserRoutineIndex";
 import ErrorRoute from "./components/ErrorRoute/ErrorRoute";
 import UserIndex from "./components/user/UserIndex";
 import ProfileEdit from "./components/auth/ProfileEdit";
 import EditProfile from "./components/auth/EditProfile";
 import Main from "./components/Main";
-import Activities from "./Activities/Activities";
+import Activities from "./components/Activities/Activities";
 import About from "./components/About";
 import Trainer from "./components/Trainer";
 import Footer from "./components/footer/Footer";
@@ -34,13 +35,14 @@ function App() {
   const [subscriptionPlans, setSubscriptionPlans] = useState([]);
   const [age, setAge] = useState(null);
   const [bmi, setBmi] = useState("");
+  const [password, setPassword] = useState("");
   const [gender, setGender] = useState(null);
   const [height, setHeight] = useState(null);
   const [weight, setWeight] = useState(null);
   const [image, setImage] = useState([]);
   const [goal, setGoal] = useState(null);
   const [task, setTask] = useState(null);
-  const [meals, setMeals] = useState(null);
+  const [meals, setMeals] = useState([]);
   const [workouts, setWorkouts] = useState(null);
   const [locations, setLocations] = useState(null);
   const [profileImg, setProfileImg] = useState("");
@@ -48,6 +50,10 @@ function App() {
   const [avata, setAvata] = useState(false);
   const [modalopen, setModalOpen] = useState(false);
   const [modaldata, setModalData] = useState({});
+  const [subData,setSubData]=useState({
+    meals:[],
+    workouts:[]
+  })
   //eg-fetch subscriptions
   useEffect(() => {
     const fetchAllSubscriptions = async () => {
@@ -107,15 +113,7 @@ function App() {
         ) {
      setWorkouts(response.data.user.subscriptions.workoutPlans)
      setMeals(response.data.user.subscriptions.mealPlans)
-        
-
-         
-// get meal data from local
-          // let workoutData = localStorage.getItem("workouts");
-          // let mealData = localStorage.getItem("meals");
-
-          // setWorkouts(JSON.parse(workoutData));
-          // setMeals(JSON.parse(mealData));
+   
         } else {
           console.log("No subscriptions found for the user.");
         }
@@ -132,6 +130,7 @@ function App() {
   return (
     <AuthContext.Provider
       value={{
+        subData,setSubData,password, setPassword,
         modaldata,
         setModalData,
         modalopen,
@@ -186,14 +185,18 @@ function App() {
             <Route path="/trainer" element={<Trainer />}></Route>
             <Route path="/user/:id/activity" element={<Activities />}></Route>
 
-            <Route path="/user/:id/guide" element={<FitnessFusionGuide />} />
+            <Route path="/user/:id/week" element={<FitnessFusionGuide_HowTo />}></Route>
+            <Route path="/user/:id/week/day" element={<FitnessFusionGuide_Daily />}></Route>
+            <Route path="/user/:id/week/day/:id" element={<FitnessFusionGuide />} />
+           
+
 
             <Route path="/user/:id/checkout" element={<CheckOut />} />
 
             <Route path="/user/subscriptions" element={<Subscription />} />
             <Route path="/contactus" element={<Footer />} />
 
-            <Route path="/user/:id/bmi" element={<CalculateBMI />} />
+            <Route path="/user/:id/bmi" element={<CalculateBMI image={image}/>} />
             <Route path="/user/:id/profile/edit" element={<EditProfile />} />
 
             <Route
@@ -201,10 +204,7 @@ function App() {
               element={<FitnessFusionGuide_Daily />}
             />
 
-            <Route
-              path="/user/guide/days/id"
-              element={<FitnessFusionGuide_Daily_id />}
-            />
+          
 
             <Route path="*" element={<ErrorRoute></ErrorRoute>} />
           </Route>

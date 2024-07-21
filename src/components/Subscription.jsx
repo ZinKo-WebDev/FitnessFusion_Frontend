@@ -47,20 +47,41 @@ const Subscription = () => {
               key={subsPlans.id}
               className="flex flex-col max-w-sm p-3  text-center text-gray-900 bg-white border border-gray-100 rounded-lg shadow  scale-90  hover:scale-100 font-poppin transition-all h-[600px] relative"
             >
-              <h3 className="mb-4 mt-4 text-2xl font-semibold text-[#C0C0C0]">
+              <h3 className=
+              {
+                subsPlans.name=="OneMonth/WeightGain"? " mb-4 mt-4 text-2xl font-bold text-[#1DA1D2] ":
+                subsPlans.name=="TwoMonth/WeightGain"? " mb-4 mt-4 text-2xl font-bold text-[#1DA1D2] ":
+                subsPlans.name=="OneMonth/WeightLoss"? " mb-4 mt-4 text-2xl font-bold text-purple-500"  :
+                subsPlans.name=="TwoMonth/WeightLoss"? " mb-4 mt-4 text-2xl font-bold text-purple-500 ":""
+                }>
                 {subsPlans.name}
               </h3>
-              <p className="font-light text-gray-500 sm:text-lg dark:text-gray-700">
+              <p className=" text-slate-900 font-semibold sm:text-lg"
+              >
                 Relevant for multiple users, extended &amp; premium support.
               </p>
-              <div className="flex items-baseline justify-center my-8">
-                <span className="mr-2 text-5xl font-extrabold">$25</span>
-                <span
+              <div className="flex flex-col justify-center items-center my-8">
+                <p className="mr-2 text-5xl font-extrabold">
+               {
+               subsPlans.name=="OneMonth/WeightGain"? "25$":
+               subsPlans.name=="TwoMonth/WeightGain"? "50$":
+               subsPlans.name=="OneMonth/WeightLoss"? "35$":
+               subsPlans.name=="TwoMonth/WeightLoss"? "70$":""
+               }
+                </p>
+                <br />
+                <p
                   className="text-gray-500 dark:text-gray-700"
                   dark:text-gray-400=""
                 >
-                  6 Week Package
-                </span>
+                   {
+               subsPlans.name=="OneMonth/WeightGain"? "4 Week Package":
+               subsPlans.name=="TwoMonth/WeightGain"? "8 Week Package":
+               subsPlans.name=="OneMonth/WeightLoss"? "4 Week Package":
+               subsPlans.name=="TwoMonth/WeightLoss"? "8 Week Package":""
+               }
+                 
+                </p>
               </div>
 
               <ul role="list" className="mb-8 space-y-4 text-left">
@@ -73,7 +94,13 @@ const Subscription = () => {
                   >
                     <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
                   </svg>
-                  <span>Unlimited Gym Access</span>
+                  {
+               subsPlans.name=="OneMonth/WeightGain"? <span>Limited Gym Access</span>:
+               subsPlans.name=="TwoMonth/WeightGain"? <span>Unlimited Gym Access</span>:
+               subsPlans.name=="OneMonth/WeightLoss"? <span>Limited Gym Access</span>:
+               subsPlans.name=="TwoMonth/WeightLoss"? <span>Unlimited Gym Access</span>:""
+               }
+          
                 </li>
                 <li className="flex items-center space-x-3">
                   <svg
@@ -84,7 +111,13 @@ const Subscription = () => {
                   >
                     <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path>
                   </svg>
-                  <span>6 Week Package</span>
+                  {
+               subsPlans.name=="OneMonth/WeightGain"? <span>4 Week Package</span>:
+               subsPlans.name=="TwoMonth/WeightGain"? <span>8 Week Package</span>:
+               subsPlans.name=="OneMonth/WeightLoss"? <span>4 Week Package</span>:
+               subsPlans.name=="TwoMonth/WeightLoss"? <span>8 Week Package</span>:""
+               }
+         
                 </li>
                 <li className="flex items-center space-x-3">
                   <svg

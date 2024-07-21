@@ -2,9 +2,9 @@ import React from 'react'
 
 const Activities = () => {
   return (
-    <div className='mt-[70px]  '>
-      
-<div class="lg:flex lg:h-full lg:flex-col w-90% mx-auto p-10">
+    <div className='  bg-[#323232] p-4'>
+      <div className="border-2 border-white rounded-2xl bg-white mt-[80px]">
+      <div class="lg:flex lg:h-full lg:flex-col w-90% mx-auto p-10">
   <header class="flex items-center justify-between border-b border-gray-200 px-6 py-4 lg:flex-none">
     <h1 class="text-base font-semibold leading-6 text-gray-900">
       <time datetime="2022-01 text-lg">January 2022</time>
@@ -527,6 +527,8 @@ const Activities = () => {
     </div>
   </div>
 </div>
+      </div>
+
     </div>
   )
 }

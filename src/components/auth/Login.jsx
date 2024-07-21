@@ -9,11 +9,11 @@ import main_logo from "../../images/main_logo.png";
 
 export default function Login() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+ 
   const [errors, setErrors] = useState(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { accessToken, setAccessToken, setCurrentUser } =
+  const { accessToken, setAccessToken, setCurrentUser ,password, setPassword} =
     useContext(AuthContext);
 
   useEffect(() => {
