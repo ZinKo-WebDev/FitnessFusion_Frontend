@@ -135,18 +135,18 @@ const FitnessFusionGuide = () => {
                   </div>
                   <button
                     onClick={(e) => mealStatusHandler(e, meal.id)}
-                    className={meal.status==1?
-                      "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-blue-600 text-white rounded-full text-xl tracking-wide": "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-red-600 text-white rounded-full text-xl tracking-wide"
+                    className={
+                      "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-blue-600 text-white rounded-full text-xl tracking-wide"
                         
                     }
                   >
                    
-                  {meal.status==1?"Active":"Finished"}  
+                Active
                   </button>
                 </div>
 
                 <img
-                  onClick={(e) => handleOpen(e, meal)}
+                  onClick={(e) => handleOpen(e, meal,image)}
                   src={`http://localhost:8000/${image}`}
                   alt="Meal_Image"
                   className="mb-6 shadow-md rounded-lg bg-slate-50 w-[525px] h-[295px] sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full object-cover"
@@ -186,17 +186,17 @@ const FitnessFusionGuide = () => {
                   </div>
                   <button
                     onClick={(e) => workoutStatusHandler(e, workout.id)}
-                    className={workout.status==1?
-                      "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-blue-600 text-white rounded-full text-xl tracking-wide": "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-red-600 text-white rounded-full text-xl tracking-wide"
+                    className={
+                      "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-blue-600 text-white rounded-full text-xl tracking-wide"
                         
                     }
                   >
              
-  {workout.status==1?"Active":"Finished"}  
+ Active
                   </button>
                 </div>
                 <img
-                  onClick={(e) => handleOpen(e, workout)}
+                  onClick={(e) => handleOpen(e, workout,image)}
                   src={`http://localhost:8000/${image}`}
                   alt=""
                   className="mb-6 shadow-md rounded-lg bg-slate-50 w-[525px] h-[295px] sm:w-[17rem] sm:mb-0 xl:mb-6 xl:w-full object-cover"

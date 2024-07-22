@@ -280,60 +280,7 @@ py-3 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-ind
                       </div>
                     </div>
                   </div>
-                  <div class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                    <div class="w-full">
-                      <label
-                        for="age"
-                        class="block mb-2 text-sm font-medium text-indigo-900 "
-                      >
-                        Age
-                      </label>
-                      <input
-                        type="number"
-                        id="age"
-                        class="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 "
-                        placeholder=""
-                        value=""
-                        onChange={(e) => setEditAge(e.target.value)}
-                      />
-                    </div>
-                    <div className=" text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 ">
-                      <label
-                        for="gender"
-                        class="block mb-2 text-sm font-medium text-indigo-900 "
-                      >
-                        gender
-                      </label>
-                      <div class="">
-                        <div className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500  w-full p-2.5 flex ">
-                          <div>
-                            <span className="">Male</span>{" "}
-                            <input
-                              type="radio"
-                              id="gender"
-                              name="gender"
-                              class="mx-1  mr-3"
-                              placeholder=""
-                              value="male"
-                              onChange={(e) => setEditGender(e.target.value)}
-                            />
-                          </div>
-                          <div>
-                            <span className="">Female</span>{" "}
-                            <input
-                              type="radio"
-                              id="gender"
-                              name="gender"
-                              class=" mx-1 mr-3"
-                              placeholder=""
-                              value="female"
-                              onChange={(e) => setEditGender(e.target.value)}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+               
 
                   <div class="flex justify-end">
                     <button

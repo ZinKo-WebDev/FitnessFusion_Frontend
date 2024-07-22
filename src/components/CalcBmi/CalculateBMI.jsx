@@ -211,7 +211,7 @@ const storeImageHandler = async (e) => {
             >
               Generate Your BMI
             </button>
-            <span className="px-3 text-red-500">Please Do not Skil This.</span>
+            <span className="px-3 text-red-500">Please Do not Skip This.</span>
             <div className="py-2">
               <label className="font-poppin font-bold py-5" htmlFor="">
                 BMI

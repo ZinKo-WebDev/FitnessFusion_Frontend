@@ -76,7 +76,7 @@ const GuideDetails = ({   handleOpen}) => {
                 <div className="relative p-6 flex-auto">
                 <div className="flex justify-center">
 
-<img className="w-[700px] h-[400px]" src={modaldata && modaldata.image?modaldata.image:""} alt="job.image" />
+<img className="w-[700px] h-[400px]" src={ modaldata.image?`http://localhost:8000/${modaldata.image}`:""} alt="job.image" />
 
 
 
@@ -84,7 +84,7 @@ const GuideDetails = ({   handleOpen}) => {
 
 </p>
 </div>
-
+<div className="">
 <p className="capitalize">{modaldata && modaldata.ingredient?"Ingridiant : "+modaldata.ingredient:""}</p>
 
 <p className="capitalize">{modaldata && modaldata.type?"Meal Type : "+modaldata.type:""}</p>
@@ -93,6 +93,8 @@ const GuideDetails = ({   handleOpen}) => {
 <p className="capitalize">{modaldata && modaldata.raps?"Raps : "+modaldata.raps:""}</p>
 <p className="capitalize">{modaldata && modaldata.set?"Set : "+modaldata.set:""}</p>
 <p className="capitalize">{modaldata && modaldata.calories?"Calories : "+modaldata.calories:""}</p>
+</div>
+
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
