@@ -28,7 +28,7 @@ const Subscription = () => {
 
 
   return (
-    <div id="subscriptions" className=" relative w-full text-[16px] justify-center items-center bg-[#323232] text-white font-bebas py-[65px] px-12">
+    <div id="subscriptions" className=" relative w-full h-screen text-[16px] justify-center items-center bg-[#323232] text-white font-bebas py-[65px] px-12">
       <div className="w-full text-[16px] text-center  ">
         <span className=" text-[70px] text-[#1DA1D2]">LEVEL UP  </span>
         <span className="text-[70px]">YOUR </span>
@@ -52,7 +52,9 @@ const Subscription = () => {
                 subsPlans.name=="OneMonth/WeightGain"? " mb-4 mt-4 text-2xl font-bold text-[#1DA1D2] ":
                 subsPlans.name=="TwoMonth/WeightGain"? " mb-4 mt-4 text-2xl font-bold text-[#1DA1D2] ":
                 subsPlans.name=="OneMonth/WeightLoss"? " mb-4 mt-4 text-2xl font-bold text-purple-500"  :
-                subsPlans.name=="TwoMonth/WeightLoss"? " mb-4 mt-4 text-2xl font-bold text-purple-500 ":""
+                subsPlans.name=="TwoMonth/WeightLoss"? " mb-4 mt-4 text-2xl font-bold text-purple-500 ": 
+                subsPlans.name=="OneMonth/Yoga"? " mb-4 mt-4 text-2xl font-bold text-orange-500"  :
+                subsPlans.name=="TwoMonth/Yoga"? " mb-4 mt-4 text-2xl font-bold text-orange-500 ":""
                 }>
                 {subsPlans.name}
               </h3>
@@ -66,7 +68,9 @@ const Subscription = () => {
                subsPlans.name=="OneMonth/WeightGain"? "25$":
                subsPlans.name=="TwoMonth/WeightGain"? "50$":
                subsPlans.name=="OneMonth/WeightLoss"? "35$":
-               subsPlans.name=="TwoMonth/WeightLoss"? "70$":""
+               subsPlans.name=="TwoMonth/WeightLoss"? "70$":
+               subsPlans.name=="OneMonth/Yoga"? "40$":
+               subsPlans.name=="TwoMonth/Yoga"? "80$":""
                }
                 </p>
                 <br />
@@ -78,7 +82,9 @@ const Subscription = () => {
                subsPlans.name=="OneMonth/WeightGain"? "4 Week Package":
                subsPlans.name=="TwoMonth/WeightGain"? "8 Week Package":
                subsPlans.name=="OneMonth/WeightLoss"? "4 Week Package":
-               subsPlans.name=="TwoMonth/WeightLoss"? "8 Week Package":""
+               subsPlans.name=="TwoMonth/WeightLoss"? "8 Week Package":
+               subsPlans.name=="OneMonth/Yoga"? "4 Week Package":
+               subsPlans.name=="TwoMonth/Yoga"? "8 Week Package":""
                }
                  
                 </p>
@@ -98,7 +104,9 @@ const Subscription = () => {
                subsPlans.name=="OneMonth/WeightGain"? <span>Limited Gym Access</span>:
                subsPlans.name=="TwoMonth/WeightGain"? <span>Unlimited Gym Access</span>:
                subsPlans.name=="OneMonth/WeightLoss"? <span>Limited Gym Access</span>:
-               subsPlans.name=="TwoMonth/WeightLoss"? <span>Unlimited Gym Access</span>:""
+               subsPlans.name=="TwoMonth/WeightLoss"? <span>Unlimited Gym Access</span>:
+               subsPlans.name=="OneMonth/Yoga"? <span>Limited Gym Access</span>:
+               subsPlans.name=="TwoMonth/Yoga"? <span>Unlimited Gym Access</span>:""
                }
           
                 </li>
@@ -115,7 +123,9 @@ const Subscription = () => {
                subsPlans.name=="OneMonth/WeightGain"? <span>4 Week Package</span>:
                subsPlans.name=="TwoMonth/WeightGain"? <span>8 Week Package</span>:
                subsPlans.name=="OneMonth/WeightLoss"? <span>4 Week Package</span>:
-               subsPlans.name=="TwoMonth/WeightLoss"? <span>8 Week Package</span>:""
+               subsPlans.name=="TwoMonth/WeightLoss"? <span>8 Week Package</span>:
+                subsPlans.name=="OneMonth/Yoga"?<span>Free Trainner</span> :
+               subsPlans.name=="TwoMonth/Yoga"? <span>Free Trainner</span> :""
                }
          
                 </li>

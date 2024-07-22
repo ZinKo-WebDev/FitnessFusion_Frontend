@@ -89,7 +89,8 @@ const CheckOut = () => {
 
   return (
     <div className=" w-full h-screen auth-transparant-bg flex justify-center items-center flex-col">
-      <div className="p-12 flex flex-col w-[60%]">
+      
+      <div className="p-12 flex flex-col w-[60%] bg-[#1F3A44] rounded-lg">
         <h1 className="text-center text-3xl font-bold text-white">Checkout</h1>
         <h1 className="text-white text-lg">Choose your payment method</h1>
         <div className="grid gap-4 sm:grid-cols-2 mt-8">
@@ -215,7 +216,7 @@ const CheckOut = () => {
                 I accept the
                 <a
                   href="javascript:void(0);"
-                  className="text-blue-600 font-semibold hover:underline ml-1"
+                  className=" font-semibold hover:underline ml-1"
                 >
                   Terms and Conditions
                 </a>
@@ -241,6 +242,8 @@ const CheckOut = () => {
           </div>
         </form>
       </div>
+     
+    
     </div>
   );
 };

@@ -56,18 +56,19 @@ const FitnessFusionGuide = () => {
 
   const mealStatusHandler = (event, mealID) => {
     setprogress((prevProgress) =>
-      prevProgress <= 99 ? prevProgress + 11 : 100
+      prevProgress <= 99 ? prevProgress + 9 : 100
     );
     let selectedMeal = workouts.find((id) => id == mealID);
-    selectedMeal.status;
+    console.log(mealID.status)
+    selectedMeal.status==0;
   };
 
   const workoutStatusHandler = (event, workoutID) => {
     setprogress((prevProgress) =>
-      prevProgress <= 99 ? prevProgress + 11 : 100
+      prevProgress <= 99 ? prevProgress + 8 : 100
     );
     let selectedWorkout = workouts.find((id) => id == workoutID);
-    selectedWorkout.status;
+    selectedWorkout.status==0;
   };
 
   const getRandomMeals = (meals, count) => {
@@ -134,12 +135,13 @@ const FitnessFusionGuide = () => {
                   </div>
                   <button
                     onClick={(e) => mealStatusHandler(e, meal.id)}
-                    className={
-                      "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-blue-600 text-white rounded-full text-xl tracking-wide"
+                    className={meal.status==1?
+                      "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-blue-600 text-white rounded-full text-xl tracking-wide": "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-red-600 text-white rounded-full text-xl tracking-wide"
                         
                     }
                   >
-                    Active
+                   
+                  {meal.status==1?"Active":"Finished"}  
                   </button>
                 </div>
 
@@ -184,12 +186,13 @@ const FitnessFusionGuide = () => {
                   </div>
                   <button
                     onClick={(e) => workoutStatusHandler(e, workout.id)}
-                    className={
-                     "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-blue-600 text-white rounded-full text-xl tracking-wide"
+                    className={workout.status==1?
+                      "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-blue-600 text-white rounded-full text-xl tracking-wide": "font-bebas py-3 w-[200px] px-1  flex justify-center items-center bg-red-600 text-white rounded-full text-xl tracking-wide"
                         
                     }
                   >
-                 Active
+             
+  {workout.status==1?"Active":"Finished"}  
                   </button>
                 </div>
                 <img
@@ -217,6 +220,7 @@ const FitnessFusionGuide = () => {
 
       <Footer></Footer>
       <GuideDetails handleOpen={handleOpen} />
+      
     </div>
   );
 };

@@ -119,9 +119,21 @@ setAvata(!avata)
             >
               FITNESS & NUTRITION
             </NavLink>
-          </li>:''
+          </li>:
+          <li className="px-3 py-2">
+          <NavLink
+            className="hover:text-[#1DA1D2] text-xl cursor-pointer active:border-b-2 active:border-[#1DA1D2] focus:border-b-2 focus:border-blue-500 "
+            aria-current="page"
+            to={`/user/subscriptions`}
+          >
+            Join Our Team
+          </NavLink>
+        </li>
           }
             
+            {
+            currentUser?.subscription_id 
+            ? 
               <li className="px-3 py-2">
                 <NavLink
                   className="hover:text-[#1DA1D2] text-xl cursor-pointer active:border-b-2 active:border-[#1DA1D2] focus:border-b-2 focus:border-blue-500 "
@@ -132,7 +144,8 @@ setAvata(!avata)
                 >
                  Activitiy
                 </NavLink>
-              </li>
+              </li>:""
+}
               <li className="px-3 py-2">
               <NavLink
                   className="hover:text-[#1DA1D2] text-xl cursor-pointer active:border-b-2 active:border-[#1DA1D2] focus:border-b-2 focus:border-blue-500 "

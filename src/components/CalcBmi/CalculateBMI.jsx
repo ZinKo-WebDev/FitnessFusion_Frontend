@@ -144,9 +144,7 @@ const storeImageHandler = async (e) => {
           >
             <div className="flex items-center space-x-6 my-3">
             <div className="flex items-center space-x-6 my-3">
-              <div className="shrink-0">
-                
-              </div>
+             
               <label className="block">
                 <span className="sr-only">Choose profile photo</span>
                 <input

@@ -54,23 +54,24 @@ export default function Login() {
   };
 
   return (
-    <div className=" w-full h-screen auth-transparant-bg flex justify-center items-center flex-col">
-      <div>
-        <img className="w-[200px] h-[160px]" src={main_logo} alt="main_logo" />
+    <div className="w-full h-screen auth-transparant-bg flex justify-center items-center flex-col">
+      <div className="">
+        <div className="w-[695px] flex justify-center  ">
+        <img  className="w-[200px] h-[160px]" src={main_logo} alt="main_logo" />
       </div>
-      <div className="flex w-[695px] h-[515px]  flex-col justify-center px-[100px] py-[200px] bg-white border-2 border-[#1DA1D2] rounded-lg">
-        <div className="">
-          <h2 className="mt-2 text-center text-2xl font-bold leading-9 tracking-tight text-[#1DA1D2]">
+      <div className="flex w-[695px] h-[650px]   flex-col justify-center px-[100px] py-[100px] bg-white rounded-lg">
+      <div className="">
+          <h2 className="mb-3 text-center text-2xl font-bold leading-9 tracking-tight text-[#1DA1D2]">
             Sign in to your account
           </h2>
         </div>
 
         <div className="mt-10 ">
-          <form className="space-y-6" onSubmit={(e) => handleSubmit(e)}>
+            <form className="space-y-4" onSubmit={(e) => handleSubmit(e)}>
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium leading-3 text-gray-900"
+               className="block text-lg font-medium leading-3 text-gray-900"
               >
                 Email address
               </label>
@@ -79,7 +80,7 @@ export default function Login() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full rounded-md border-0 py-2 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-3"
+                  className="block w-full rounded-md border-0 py-2 outline-none px-3 text-gray-900 shadow-sm ring-1 ring-inset text-lg ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:leading-3"
                 />
                 {useValidation(errors, "email")}
               </div>
@@ -87,7 +88,7 @@ export default function Login() {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-medium leading-3 text-gray-900"
+               className="block text-lg font-medium leading-3 text-gray-900"
               >
                 Password
               </label>
@@ -103,7 +104,7 @@ export default function Login() {
               <div className="text-sm">
                 <a
                   href="#"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  className="font-semibold text-indigo-600 hover:text-indigo-500 text-md"
                 >
                   Forgot password?
                 </a>
@@ -120,17 +121,18 @@ export default function Login() {
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-10  text-center text-md text-gray-700 tracking-wide font-bold">
             Not a member?
             <a
               href="/register"
-              className="font-semibold leading-3 text-[#1DA1D2] hover:text-indigo-500"
+              className="font-semibold leading-3 text-[#1DA1D2] hover:text-indigo-500 px-2"
             >
               Go To Register.
             </a>
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 }
